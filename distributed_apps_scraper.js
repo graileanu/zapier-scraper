@@ -2,6 +2,11 @@ const puppeteer = require('puppeteer-core');
 const fs = require('fs').promises;
 const path = require('path');
 const os = require('os');
+const redisClient = require('./utils/redisClient');
+require('dotenv').config();
+
+// Get machine ID from env or hostname
+const MACHINE_ID = process.env.MACHINE_ID || os.hostname().split('.')[0];
 
 // Get the default Chrome path based on the operating system
 function getDefaultChromePath() {
@@ -364,6 +369,40 @@ async function processBatch(urls, categoryName, batchId) {
     await browser.close();
   }
 }
+
+// Add machine status tracking
+const machineStatus = {
+  machine_id: MACHINE_ID,
+  started_at: Date.now(),
+  last_active: Date.now(),
+  processed_count: 0,
+  failed_count: 0,
+  current_app: null,
+  current_category: null
+};
+
+// Update machine status periodically
+setInterval(async () => {
+  try {
+    await redisClient.updateMachineStatus(MACHINE_ID, machineStatus);
+  } catch (error) {
+    debug('Failed to update machine status:', error);
+  }
+}, 30000);
+
+// Handle graceful shutdown
+process.on('SIGINT', async () => {
+  debug('Shutting down...');
+  try {
+    await redisClient.updateMachineStatus(MACHINE_ID, {
+      ...machineStatus,
+      status: 'stopped'
+    });
+  } catch (error) {
+    debug('Error updating final status:', error);
+  }
+  process.exit();
+});
 
 async function main() {
   debug('Starting app scraping process');
