@@ -3,7 +3,10 @@
 ## Add new node:
 `git clone https://github.com/graileanu/zapier-scraper.git`
 `cd zapier-scraper`
-`npm install`
 `bash bin/ubuntu_setup.sh`
+`npm install`
+
 Populate .env with the correct values.
+
+Run the scraper:
 `node distributed_apps_scraper.js`

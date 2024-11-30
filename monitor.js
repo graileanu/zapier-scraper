@@ -1,6 +1,17 @@
 const Redis = require('ioredis');
 const Table = require('cli-table3');
 const colors = require('colors/safe');
+const fs = require('fs');
+
+// Check if .env exists
+if (!fs.existsSync('.env')) {
+  console.error(colors.red('Error: .env file not found!'));
+  console.log('\nPlease create a .env file with the required configuration:');
+  console.log(colors.cyan('REDIS_URL=your_redis_url'));
+  console.log(colors.cyan('CONCURRENT_BATCHES=1'));
+  process.exit(1);
+}
+
 require('dotenv').config();
 
 // Create Redis client with proper configuration
