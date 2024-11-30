@@ -18,7 +18,7 @@ function getDefaultChromePath() {
 const CONFIG = {
   CHROME_PATH: process.env.CHROME_PATH || getDefaultChromePath(),
   CATEGORY_DIR: 'category_results',
-  APPS_DIR: 'apps',
+  APPS_DIR: 'data/apps',
   TIMEOUT: 120000,
   LOAD_MORE_DELAY: 3000,
   DEBUG: true,
@@ -51,30 +51,6 @@ async function setupPage(page) {
   await page.setDefaultNavigationTimeout(CONFIG.TIMEOUT);
 }
 
-async function findAndClickLoadMore(page) {
-  debug('Looking for Load More button');
-  
-  try {
-    const button = await page.$('[class*="LoadMore"], [class*="loadMore"]');
-    if (button) {
-      const isVisible = await page.evaluate(el => {
-        const rect = el.getBoundingClientRect();
-        return rect.width > 0 && rect.height > 0 && window.getComputedStyle(el).display !== 'none';
-      }, button);
-
-      if (isVisible) {
-        debug('Found and clicking Load More button');
-        await button.click();
-        await delay(2000); // Wait for content to load
-        return true;
-      }
-    }
-  } catch (e) {
-    debug('Error clicking Load More:', e.message);
-  }
-  
-  return false;
-}
 
 async function clickTriggerActionsTab(page) {
   debug('Looking for Triggers & Actions tab');
