@@ -22,14 +22,14 @@ if ! command -v node &> /dev/null || ! command -v npm &> /dev/null; then
     sudo rm -f /etc/apt/sources.list.d/nodesource.list.save
     
     # Install prerequisites
-    sudo apt update
-    sudo apt install -y ca-certificates curl gnupg
+    sudo apt-get update
+    sudo apt-get install -y ca-certificates curl gnupg
     
     # Add NodeSource repository
     curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
     
     # Install Node.js
-    sudo apt install -y nodejs
+    sudo apt-get install -y nodejs
     
     # Verify installation
     echo "Node.js version: $(node --version)"
@@ -120,9 +120,9 @@ sudo apt update
 echo "Installing prerequisites..."
 sudo apt install -y wget curl gnupg
 
-# Add the new Chrome repository key
+# Add the new Chrome repository key (with force overwrite)
 echo "Adding Chrome repository key..."
-curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome-archive-keyring.gpg
+curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --yes --dearmor -o /usr/share/keyrings/google-chrome-archive-keyring.gpg
 
 # Add the Chrome repository
 echo "Adding Chrome repository..."
@@ -132,12 +132,12 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome-archive-keyrin
 echo "Updating package list with Chrome repository..."
 sudo apt update
 
-# Install Chrome and dependencies
+# Install Chrome and dependencies non-interactively
 echo "Installing Chrome and dependencies..."
 PACKAGES=$(get_package_list)
 for package in $PACKAGES; do
     echo "Installing $package..."
-    sudo apt install -y $package || echo "Failed to install $package, continuing..."
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends $package || echo "Failed to install $package, continuing..."
 done
 
 # Verify Chrome installation
