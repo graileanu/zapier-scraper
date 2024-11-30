@@ -4,3 +4,4 @@ apps/*
 .env
 
 node_modules/
+lock/*

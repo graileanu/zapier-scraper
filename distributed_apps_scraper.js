@@ -29,6 +29,7 @@ const CONFIG = {
   CHROME_PATH: process.env.CHROME_PATH || getDefaultChromePath(),
   CATEGORY_DIR: 'category_results',
   APPS_DIR: 'apps',
+  LOCK_DIR: 'lock',
   TIMEOUT: 120000,
   LOAD_MORE_DELAY: 3000,
   DEBUG: true,
@@ -303,10 +304,18 @@ async function processApp(page, url, categoryName, retryCount = 0) {
   const outputPath = path.join(CONFIG.APPS_DIR, `${appName}.json`);
 
   try {
-    // Check Redis status first before processing
+    // Check local cache first
+    if (await checkLocalCache(appName)) {
+      debug(`Skipping ${appName} - found in local cache`);
+      return { processed: false, skipped: true };
+    }
+
+    // Check Redis status if not in local cache
     const { isProcessing, isCompleted } = await redisService.checkAppStatus(appName);
     
     if (isCompleted) {
+      // Add to local cache before skipping
+      await markLocalCache(appName);
       debug(`Skipping ${appName} - already processed in Redis`);
       return { processed: false, skipped: true };
     }
@@ -328,10 +337,11 @@ async function processApp(page, url, categoryName, retryCount = 0) {
     }
 
     if (appData) {
-      // Save data both locally and to Redis
+      // Save data both locally and to Redis, and update local cache
       await Promise.all([
         fs.writeFile(outputPath, JSON.stringify(appData, null, 2)),
-        redisService.markAppCompleted(appName, appData)
+        redisService.markAppCompleted(appName, appData),
+        markLocalCache(appName)
       ]);
       
       machineStatus.processed_count++;
@@ -448,8 +458,11 @@ async function main() {
   const CONCURRENT_BATCHES = CONFIG.CONCURRENT_BATCHES;
 
   try {
-    // Create apps directory if it doesn't exist
-    await fs.mkdir(CONFIG.APPS_DIR, { recursive: true });
+    // Create necessary directories if they don't exist
+    await Promise.all([
+      fs.mkdir(CONFIG.APPS_DIR, { recursive: true }),
+      fs.mkdir(CONFIG.LOCK_DIR, { recursive: true })
+    ]);
 
     while (true) { // Continuous processing loop
       // Get available category files
