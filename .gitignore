@@ -1,1 +1,5 @@
 dataset/*
+
+.env
+
+node_modules/
