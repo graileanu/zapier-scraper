@@ -330,7 +330,7 @@ async function processApp(page, url, categoryName, retryCount = 0) {
   try {
     // Check local cache first
     if (await checkLocalCache(appName)) {
-      debug(`Skipping ${appName} - found in local cache`);
+      debug(`Skipping ${appName} - ${colors.gray('found in local cache')}`);
       return { processed: false, skipped: true };
     }
 
@@ -340,18 +340,19 @@ async function processApp(page, url, categoryName, retryCount = 0) {
     if (isCompleted) {
       // Add to local cache before skipping
       await markLocalCache(appName);
-      debug(`Skipping ${appName} - already processed in Redis`);
+      debug(`Skipping ${appName} - ${colors.yellow('already processed in Redis')}`);
       return { processed: false, skipped: true };
     }
 
     if (isProcessing) {
-      debug(`Skipping ${appName} - being processed by another machine`);
+      debug(`Skipping ${appName} - ${colors.cyan('being processed by another machine')}`);
       return { processed: false, skipped: true };
     }
 
     // Mark as processing in Redis before starting
     await redisService.markAppProcessing(appName);
     machineStatus.current_app = appName;
+    debug(`${colors.green('Processing')} ${appName}`);
 
     const appData = await scrapeApp(page, url, categoryName);
     if (!appData && retryCount < CONFIG.MAX_RETRIES) {
