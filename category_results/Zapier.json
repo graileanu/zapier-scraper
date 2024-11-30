@@ -1,0 +1,17 @@
+{
+  "category": "Zapier",
+  "url": "https://zapier.com/apps/categories/zapier-tools",
+  "scrapedAt": "2024-11-30T09:03:10.729Z",
+  "totalUrls": 9,
+  "urls": [
+    "https://zapier.com/apps/netsuite/integrations",
+    "https://zapier.com/apps/salesforce/integrations",
+    "https://zapier.com/apps/hubspot/integrations",
+    "https://zapier.com/apps/slack/integrations",
+    "https://zapier.com/apps/openai/integrations",
+    "https://zapier.com/apps/microsoft-dynamics-crm/integrations",
+    "https://zapier.com/apps/microsoft-teams/integrations",
+    "https://zapier.com/apps/zendesk/integrations",
+    "https://zapier.com/apps/jira-software-cloud/integrations"
+  ]
+}

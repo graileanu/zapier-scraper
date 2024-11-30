@@ -1,0 +1,4625 @@
+[{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/8913a06feb7556d01285c052e4ad59d0.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Google Sheets",
+      "isPremium": false,
+      "slug": "google-sheets",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=16893",
+  "id": "0b52cdfe-1a6e-4d1f-a2b5-b352feb637b2",
+  "title": "Add customers from new Google Sheets rows to Retently and send them surveys",
+  "url": "/apps/google-sheets/integrations/retently/16893/add-customers-from-new-google-sheets-rows-to-retently-and-send-them-surveys",
+  "legacyId": "16893",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Storing contact information in a spreadsheet? This integration will let you reach out for their opinion at scale. Once you turn it on, it will capture new rows you add on Google Sheets and create customers on Retently for each one, following up by sending them an email survey to get their feedback."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "tagName": "strong",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Note: Your spreadsheet must have a column containing customer emails for this integration to work"
+              }
+            ],
+            "classNames": []
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this Google Sheets-Retently integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A new spreadsheet row is added to a Google Sheets file"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier creates a customer to Retently and sends an email survey"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Google Sheets"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "add-customers-from-new-google-sheets-rows-to-retently-and-send-them-surveys",
+  "steps": [
+    {
+      "label": "New Spreadsheet Row",
+      "action": "new_row_notify_hook",
+      "selectedApi": "GoogleSheetsV2API",
+      "typeOf": "read",
+      "app": {
+        "id": "0d71fb90-f233-4ce0-bdb1-3a2c887dfadf",
+        "slug": "google-sheets",
+        "name": "Google Sheets",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/8913a06feb7556d01285c052e4ad59d0.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/8913a06feb7556d01285c052e4ad59d0.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Send an Email Survey",
+      "action": "survey",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/4da9d3e3f93cd522f85e1b0695341f89.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Shopify",
+      "isPremium": true,
+      "slug": "shopify",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=16918",
+  "id": "72130e13-da1b-4b70-9bfd-fcc5038fa6f5",
+  "title": "Add new Shopify customers to Retently and survey them",
+  "url": "/apps/retently/integrations/shopify/16918/add-new-shopify-customers-to-retently-and-survey-them",
+  "legacyId": "16918",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "A great time to survey your customers is right after they've made a purchase. This Zapier integration makes this a snap! Each new customer coming through your Shopify store will get added to Retently, where they will receive a survey to be filled out. Gather immediate feedback about the your store, purchased products, or other important data that you need to make your customer's experience great. "
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this Shopify-Retently integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A new customer is added to Shopify"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier adds the customer to Retently and sends a survey"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Shopify"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "add-new-shopify-customers-to-retently-and-survey-them",
+  "steps": [
+    {
+      "label": "New Customer",
+      "action": "customer",
+      "selectedApi": "ShopifyCLIAPI@3.0.1",
+      "typeOf": "read",
+      "app": {
+        "id": "eadaf91b-254f-469f-ab15-91dca84b5bf2",
+        "slug": "shopify",
+        "name": "Shopify",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/4da9d3e3f93cd522f85e1b0695341f89.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/4da9d3e3f93cd522f85e1b0695341f89.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Send an Email Survey",
+      "action": "survey",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/11da7c79f8ba6d25c242c964c1861aa8.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Workable",
+      "isPremium": false,
+      "slug": "workable",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=18528",
+  "id": "32c68679-1b96-4528-80b1-fb45f25a6810",
+  "title": "Add new Workable candidates to Retently and send transactional email NPS surveys",
+  "url": "/apps/retently/integrations/workable/18528/add-new-workable-candidates-to-retently-and-send-transactional-email-nps-surveys",
+  "legacyId": "18528",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "The experience of a new applicant can provide valuable insights. Set up this integration and every new candidate you add to Workable will also be added to Retently. They will then receive a survey automatically, letting you gather their opinion at just the right time."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this Workable-Retently integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A new candidate is created within your Workable instance."
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier automatically imports the new candidate to Retently, and sends them an email survey"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Workable"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "add-new-workable-candidates-to-retently-and-send-transactional-email-nps-surveys",
+  "steps": [
+    {
+      "label": "New Candidate",
+      "action": "candidate_new",
+      "selectedApi": "WorkableCLIAPI@2.1.0",
+      "typeOf": "read",
+      "app": {
+        "id": "f64c1342-1c66-4c38-82a1-befc43994998",
+        "slug": "workable",
+        "name": "Workable",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/11da7c79f8ba6d25c242c964c1861aa8.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/11da7c79f8ba6d25c242c964c1861aa8.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Send an Email Survey",
+      "action": "survey",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": false,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/cde9764aa8d19fdd6d591455dbe5a78d.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "HubSpot",
+      "isPremium": false,
+      "slug": "hubspot",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=20948",
+  "id": "b8721bf9-70bc-4e42-9943-cb8dc1f2739b",
+  "title": "Add new HubSpot contacts to Retently",
+  "url": "/apps/hubspot/integrations/retently/20948/add-new-hubspot-contacts-to-retently",
+  "legacyId": "20948",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Need to keep your lists updated on all your apps? This integration, once active, will automatically copy all new contacts from HubSpot to your Retently account. You can also attach custom tags to your imported contacts so it's easier to segment your audience later. Now you can add specific segments of contacts to NPS campaigns and start collecting customer feedback!"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this HubSpot-Retently integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A new contact is added to HubSpot"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier creates the contact in Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "HubSpot"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "add-new-hubspot-contacts-to-retently",
+  "steps": [
+    {
+      "label": "New Contact",
+      "action": "contactList",
+      "selectedApi": "HubSpotCLIAPI@1.10.2",
+      "typeOf": "read",
+      "app": {
+        "id": "1e4fcbf4-d80b-4ec3-b33b-c085f1ecbbaa",
+        "slug": "hubspot",
+        "name": "HubSpot",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/cde9764aa8d19fdd6d591455dbe5a78d.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/cde9764aa8d19fdd6d591455dbe5a78d.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create or Update Customer",
+      "action": "customer",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/cde9764aa8d19fdd6d591455dbe5a78d.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "HubSpot",
+      "isPremium": false,
+      "slug": "hubspot",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=20952",
+  "id": "be7f8f47-83e7-41ae-8c89-20978ab101fd",
+  "title": "Add new HubSpot contacts from lists to Retently and send them surveys",
+  "url": "/apps/hubspot/integrations/retently/20952/add-new-hubspot-contacts-from-lists-to-retently-and-send-them-surveys",
+  "legacyId": "20952",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "If you're looking for a way to get feedback at scale, try this workflow. Whenever a contact is added to a specified list in HubSpot, Zapier can automatically copy the contact to Retently. On top of that, this integration will also send them an email survey, so you can match the right questions with the right segments easily."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this HubSpot-Retently integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A new contact is added to the specified HubSpot list"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier creates the customer in Retently and sends a transactional email NPS survey"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "HubSpot"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "add-new-hubspot-contacts-from-lists-to-retently-and-send-them-surveys",
+  "steps": [
+    {
+      "label": "New Contact in List",
+      "action": "new_contact_in_list_resthook_v3",
+      "selectedApi": "HubSpotCLIAPI@1.10.2",
+      "typeOf": "read",
+      "app": {
+        "id": "1e4fcbf4-d80b-4ec3-b33b-c085f1ecbbaa",
+        "slug": "hubspot",
+        "name": "HubSpot",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/cde9764aa8d19fdd6d591455dbe5a78d.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/cde9764aa8d19fdd6d591455dbe5a78d.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Send an Email Survey",
+      "action": "survey",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/d657ba4f3441a30ced367a4aa7cacacb.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Pipedrive",
+      "isPremium": false,
+      "slug": "pipedrive",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=20960",
+  "id": "9635a02e-ddad-4491-8cbb-ba56167e08dd",
+  "title": "Send Retently surveys to prospects after deals are updated in Pipedrive",
+  "url": "/apps/pipedrive/integrations/retently/20960/send-retently-surveys-to-prospects-after-deals-are-updated-in-pipedrive",
+  "legacyId": "20960",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "After your sales team closes a deal, getting customer feedback will help you focus on what went right and avoid what didn't. Set up this integration and we'll help by creating a customer in Retently and sending them a survey whenever you mark a deal as won on Pipedrive, making sure that contact has the chance to help you grow."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "tagName": "em",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Note: Be sure to change the trigger option so that only deals marked \"Won\" activate this Zap"
+              }
+            ],
+            "classNames": []
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this Pipedrive-Retently integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "An existing deal is updated in Pipedrive"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier creates a contact on Retently and sends them an email survey"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Pipedrive"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "send-retently-surveys-to-prospects-after-deals-are-updated-in-pipedrive",
+  "steps": [
+    {
+      "label": "Updated Deal",
+      "action": "updated_deal_v3",
+      "selectedApi": "PipedriveCLIAPI@3.16.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9970f5f7-b4d3-448c-94f7-bd1aa639c17c",
+        "slug": "pipedrive",
+        "name": "Pipedrive",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/d657ba4f3441a30ced367a4aa7cacacb.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/d657ba4f3441a30ced367a4aa7cacacb.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Send an Email Survey",
+      "action": "survey",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/785f1b175e2861a0b71ea6f63281142e.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Mixpanel",
+      "isPremium": false,
+      "slug": "mixpanel",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=20961",
+  "id": "f595e5eb-04d1-43fa-8961-351ff6da5aaf",
+  "title": "Update Mixpanel profiles with new Retently NPS survey responses",
+  "url": "/apps/mixpanel/integrations/retently/20961/update-mixpanel-profiles-with-new-retently-nps-survey-responses",
+  "legacyId": "20961",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Make sure your analytics always rely on the latest data by using automation to keep them fresh. After you turn on this integration, it will automatically catch the info from any new Retently survey response and create a Mixpanel profile for you or update one if it already exists so you always have the latest scores and feedback."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "*Note: This Zapier integration doesn't update profiles with already received survey responses, only new responses after you've set it up."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this Retently-Mixpanel integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A new survey response is received in Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier automatically creates a new profile or update properties of an existing profile in Mixpanel"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Mixpanel"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "update-mixpanel-profiles-with-new-retently-nps-survey-responses",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create or Update Profile",
+      "action": "engage",
+      "selectedApi": "MixpanelCLIAPI@1.2.0",
+      "typeOf": "write",
+      "app": {
+        "id": "ae975560-1327-4ccb-bab6-e36ea7450dae",
+        "slug": "mixpanel",
+        "name": "Mixpanel",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/785f1b175e2861a0b71ea6f63281142e.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/785f1b175e2861a0b71ea6f63281142e.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 7232,
+    "primaryColor": "7856FF",
+    "slug": "mixpanel",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": false,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/45e89018e756b043d806701f17dc2632.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Zendesk",
+      "isPremium": true,
+      "slug": "zendesk",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=20962",
+  "id": "d6468759-8be4-4038-a9cb-4de8f7fe8999",
+  "title": "Add new Zendesk users to Retently",
+  "url": "/apps/retently/integrations/zendesk/20962/add-new-zendesk-users-to-retently",
+  "legacyId": "20962",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "The users you support are also great sources of feedback. Let this automation make sure your records are ready for you to reach out as needed. After you turn it on, Zapier will create a user in Retently whenever you add a user on Zendesk, so you can add users to NPS campaigns and send surveys whenever you need."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this Zendesk-Retently integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A new user is created in Zendesk"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier creates the user on Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zendesk"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "add-new-zendesk-users-to-retently",
+  "steps": [
+    {
+      "label": "New User",
+      "action": "user_v2",
+      "selectedApi": "ZendeskV2CLIAPI@1.13.0",
+      "typeOf": "read",
+      "app": {
+        "id": "09071bf9-8d79-49e5-91f0-df252b036671",
+        "slug": "zendesk",
+        "name": "Zendesk",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/45e89018e756b043d806701f17dc2632.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/45e89018e756b043d806701f17dc2632.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create or Update Customer",
+      "action": "customer",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/828224d51826ca2d678e0ac9bf5343d3.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Groove",
+      "isPremium": false,
+      "slug": "groove",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=20963",
+  "id": "ba5aafd0-efee-4a7f-af2c-bb777267fcbb",
+  "title": "Send Retently email NPS surveys to customers after tickets are closed in Groove",
+  "url": "/apps/groove/integrations/retently/20963/send-retently-email-nps-surveys-to-customers-after-tickets-are-closed-in-groove",
+  "legacyId": "20963",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Measure your customers' satisfaction after interactions with your support team and you'll become more efficient. Turn on this integration, and when a ticket is marked as closed in Groove, Zapier will create the customer in Retently and will send an email NPS survey to gather feedback."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this Groove-Retently integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A ticket is marked as closed in Groove"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier creates the customer on Retently and sends an email survey"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Groove"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "send-retently-email-nps-surveys-to-customers-after-tickets-are-closed-in-groove",
+  "steps": [
+    {
+      "label": "Ticket Closed",
+      "action": "ticket_closed",
+      "selectedApi": "GrooveCLIAPI@1.10.0",
+      "typeOf": "read",
+      "app": {
+        "id": "572b586a-0855-454b-96fd-437cc30c636a",
+        "slug": "groove",
+        "name": "Groove",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/828224d51826ca2d678e0ac9bf5343d3.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/828224d51826ca2d678e0ac9bf5343d3.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Send an Email Survey",
+      "action": "survey",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/71caadc702b04522a1ff7eb057a0af84.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "WooCommerce",
+      "isPremium": false,
+      "slug": "woocommerce",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=24544",
+  "id": "8aba6a1c-c9a6-4549-a20c-a571acca3af7",
+  "title": "Send transactional NPS surveys in Retently to customers that pay for new orders in WooCommerce",
+  "url": "/apps/retently/integrations/woocommerce/24544/send-transactional-nps-surveys-in-retently-to-customers-that-pay-for-new-orders-in-woocommerce",
+  "legacyId": "24544",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "This Zap gives you the possibility to measure your customers' satisfaction after a purchase. Whenever a customer pays for a new order in WooCommerce, they will be added to your Retently account and a Transactional email NPS survey will be triggered automatically."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this WooCommerce - Retently integration works:"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A new order is paid in WooCommerce."
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier creates the customer in Retently and sends an email survey."
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "WooCommerce"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "send-transactional-nps-surveys-in-retently-to-customers-that-pay-for-new-orders-in-woocommerce",
+  "steps": [
+    {
+      "label": "Order",
+      "action": "orderHook",
+      "selectedApi": "WooCommerceCLIAPI@2.9.3",
+      "typeOf": "read",
+      "app": {
+        "id": "9028249c-fda9-49a8-a16b-9538303944d8",
+        "slug": "woocommerce",
+        "name": "WooCommerce",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/71caadc702b04522a1ff7eb057a0af84.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/71caadc702b04522a1ff7eb057a0af84.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Send an Email Survey",
+      "action": "survey",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/b3c44e0b8a68d87d8bf98e467d05b044.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "BigCommerce",
+      "isPremium": true,
+      "slug": "bigcommerce",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=24545",
+  "id": "fcb6ef5e-5fdb-446b-8896-7b0ea455dab8",
+  "title": "Send a Transactional NPS survey to customers that paid for a new order in BigCommerce",
+  "url": "/apps/bigcommerce/integrations/retently/24545/send-a-transactional-nps-survey-to-customers-that-paid-for-a-new-order-in-bigcommerce",
+  "legacyId": "24545",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Measure your customers' satisfaction after placing and paying for an order in BigCommerce. Every time a customer pays for a new order, Zapier will create them in Retently. Once the customer was created, Retently will send them a Transactional email NPS survey."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "This Zapier integration doesn't import customers that have already paid for an order in BigCommerce, only customers that pay for an order after you have set it up."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this BigCommerce - Retently integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A new order is paid in BigCommerce."
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier creates the customer in Retently and email survey is triggered."
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "BigCommerce"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "send-a-transactional-nps-survey-to-customers-that-paid-for-a-new-order-in-bigcommerce",
+  "steps": [
+    {
+      "label": "Order Created",
+      "action": "newOrder",
+      "selectedApi": "BigCommerceCLIAPI@2.2.0",
+      "typeOf": "read",
+      "app": {
+        "id": "dbc569b2-2b40-4caa-b9bf-7e28ec2bc705",
+        "slug": "bigcommerce",
+        "name": "BigCommerce",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/b3c44e0b8a68d87d8bf98e467d05b044.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/b3c44e0b8a68d87d8bf98e467d05b044.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Send an Email Survey",
+      "action": "survey",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": false,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/da3ff465abd3a3e1b687c52ff803af74.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Trello",
+      "isPremium": false,
+      "slug": "trello",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=24729",
+  "id": "ca642527-3829-4ee8-adb8-a0288aa9c4d0",
+  "title": "Create new Trello cards for new Retently customer responses",
+  "url": "/apps/retently/integrations/trello/24729/create-new-trello-cards-for-new-retently-customer-responses",
+  "legacyId": "24729",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Turn customer responses into tasks and work together with your team on closing the feedback loop. When a customer answers to an NPS survey, the response will be added to Trello as a new card."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this Retently - Trello integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Triggers when a new survey response is received in Retently."
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Adds a new card on a specific board and list in Trello."
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Trello"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "create-new-trello-cards-for-new-retently-customer-responses",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create Card",
+      "action": "card",
+      "selectedApi": "TrelloCLIAPI@1.0.4",
+      "typeOf": "write",
+      "app": {
+        "id": "b9df4eff-f311-44f9-ac54-2901f952c6ac",
+        "slug": "trello",
+        "name": "Trello",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/da3ff465abd3a3e1b687c52ff803af74.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/da3ff465abd3a3e1b687c52ff803af74.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 60,
+    "primaryColor": "0079bf",
+    "slug": "trello",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/ea4a5ee38c7a088e243745dd0b851784.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Jira Software Server",
+      "isPremium": false,
+      "slug": "jira-software-server",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=24731",
+  "id": "65accefc-4fc3-46df-bb93-9530304e8d10",
+  "title": "Create new issues in JIRA for each customer response in Retently",
+  "url": "/apps/jira-software-server/integrations/retently/24731/create-new-issues-in-jira-for-each-customer-response-in-retently",
+  "legacyId": "24731",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Keep your team updated with the latest customer feedback. Whenever a customer leaves a new response to your NPS survey, Zapier will create a new issue in JIRA."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How this Retently - JIRA integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Triggers when a new survey response is received in Retently."
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Create a new issue, select your own project and issue type in JIRA."
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "JIRA"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "create-new-issues-in-jira-for-each-customer-response-in-retently",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create Issue",
+      "action": "create_issue_v2",
+      "selectedApi": "JIRA6CLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "4648fb82-8615-4973-8936-26cc3f4e9a6b",
+        "slug": "jira-software-server",
+        "name": "Jira Software Server",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/ea4a5ee38c7a088e243745dd0b851784.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/ea4a5ee38c7a088e243745dd0b851784.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 19,
+    "primaryColor": "205081",
+    "slug": "jira-software-server",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": false,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=25460",
+  "id": "352174d4-2e9f-4fdf-97a4-b0777f800c79",
+  "title": "Analyze Retently feedback with MonkeyLearn and tag new responses",
+  "url": "/apps/retently/integrations/retently/25460/analyze-retently-feedback-with-monkeylearn-and-tag-new-responses",
+  "legacyId": "25460",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Struggling to analyze all of your open-ended feedback on Retently? With this zap, you will be able to automatically process answers with MonkeyLearn. When a new response is received in Retently, MonkeyLearn will analyze the content and classify the answer according to aspect or sentiment. The results will be sent back to Retently to tag the customer response on the platform."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How it works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A new customer response is completed in Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "MonkeyLearn analyzes the response and gets the corresponding aspect or sentiment"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "The customer response is tagged in Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "MonkeyLearn"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "analyze-retently-feedback-with-monkeylearn-and-tag-new-responses",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Apply Tag to Response",
+      "action": "apply_tag_to_response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": false,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/7de8463194fc2997c5b073e3af57eb6c.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "ChartMogul",
+      "isPremium": false,
+      "slug": "chartmogul",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=28923",
+  "id": "afff4d30-5bbc-4c22-884f-456ebeba589a",
+  "title": "Add new Retently NPS scores to ChartMogul customers",
+  "url": "/apps/chartmogul/integrations/retently/28923/add-new-retently-nps-scores-to-chartmogul-customers",
+  "legacyId": "28923",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Retently lets you gather customer feedback from multiple sources. Make sure that data flows to the rest of your system with this automation. Once active, this Zap will automatically copy every new NPS response you receive and add that as a custom attribute to the customer in ChartMogul, ensuring you don't lose any details."
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "tagName": "em",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Note: This Zapier integration doesn't import already collected NPS data into ChartMogul, only new responses after you've set it up."
+              }
+            ],
+            "classNames": []
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "How the Retently NPS - ChartMogul integration works"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ol",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "A new NPS response is received in Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Zapier adds the NPS score to the customer in ChartMogul"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "h2",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Apps involved"
+          }
+        ],
+        "classNames": []
+      },
+      {
+        "rawText": "\n\n"
+      },
+      {
+        "tagName": "ul",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "Retently"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          },
+          {
+            "tagName": "li",
+            "rawAttrs": "",
+            "childNodes": [
+              {
+                "rawText": "ChartMogul"
+              }
+            ],
+            "classNames": []
+          },
+          {
+            "rawText": "\n"
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "add-new-retently-nps-scores-to-chartmogul-customers",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": null,
+      "action": "add_custom_attribute",
+      "selectedApi": "ChartMogulCLIAPI@3.1.0",
+      "typeOf": "write",
+      "app": {
+        "id": "0a52d2fa-8501-442a-a88b-476a9d6a49df",
+        "slug": "chartmogul",
+        "name": "ChartMogul",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/7de8463194fc2997c5b073e3af57eb6c.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/7de8463194fc2997c5b073e3af57eb6c.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 3394,
+    "primaryColor": "EE4F54",
+    "slug": "chartmogul",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": false,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/aad9fa9b9173fbf47d86323ce328edc4.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "PayKickstart",
+      "isPremium": false,
+      "slug": "paykickstart",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=86445",
+  "id": "628b3879-7aaa-4593-9c31-864dcb5650f3",
+  "title": "Send a Retently survey to customers that paid for a new order via PayKickstart",
+  "url": "/apps/paykickstart/integrations/retently/86445/send-a-retently-survey-to-customers-that-paid-for-a-new-order-via-paykickstart",
+  "legacyId": "86445",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Measure your customers' satisfaction after placing and paying for a new order on PayKickstart. Every time a customer pays for a new order, Zapier will add them to Retently and will automatically send the customer a NPS survey."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "send-a-retently-survey-to-customers-that-paid-for-a-new-order-via-paykickstart",
+  "steps": [
+    {
+      "label": "New Order",
+      "action": "new_order",
+      "selectedApi": "PayKickstartCLIAPI@1.5.0",
+      "typeOf": "read",
+      "app": {
+        "id": "8211efbe-67af-4f55-bbbc-a249cdc16a38",
+        "slug": "paykickstart",
+        "name": "PayKickstart",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/aad9fa9b9173fbf47d86323ce328edc4.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/aad9fa9b9173fbf47d86323ce328edc4.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Send an Email Survey",
+      "action": "survey",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/270b400648bbda23a11fd7e46b91b2fa.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Productboard",
+      "isPremium": false,
+      "slug": "productboard",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1262433",
+  "id": "cce38a1a-1577-4dd4-af60-fc8a5264ae5b",
+  "title": "Create Productboard notes from new Retently survey responses",
+  "url": "/apps/productboard/integrations/retently/1262433/create-productboard-notes-from-new-retently-survey-responses",
+  "legacyId": "1262433",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Effortlessly keep track of your customer feedback with this Retently to Productboard automation. When a new survey response is received in Retently, a note is instantly created in Productboard, ensuring that important insights are organized and easily accessible for your team to review and take action on. Stay on top of customer satisfaction and make timely improvements to your products and services with this seamless workflow."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "create-productboard-notes-from-new-retently-survey-responses",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create Note",
+      "action": "note",
+      "selectedApi": "ProductboardCLIAPI@1.5.1",
+      "typeOf": "write",
+      "app": {
+        "id": "3105761b-fcb0-4108-8b33-de8003db6adf",
+        "slug": "productboard",
+        "name": "Productboard",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/270b400648bbda23a11fd7e46b91b2fa.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/270b400648bbda23a11fd7e46b91b2fa.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 2961,
+    "primaryColor": "139BD4",
+    "slug": "productboard",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/93a23c7cd310288cd40df929988cb9b9.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Accelo",
+      "isPremium": false,
+      "slug": "accelo",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1287402",
+  "id": "38844ea7-0353-4c97-9629-0c18e254e46c",
+  "title": "Process new Retently survey responses to create or update Accelo contacts",
+  "url": "/apps/accelo/integrations/retently/1287402/process-new-retently-survey-responses-to-create-or-update-accelo-contacts",
+  "legacyId": "1287402",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Effortlessly manage your contacts in Accelo by connecting it to your Retently survey responses. With this workflow, each time a new survey response is received in Retently, a contact will be created or updated in Accelo. This way, you can easily keep track of customer feedback and ensure your contact information is consistently up-to-date, streamlining your customer relations process."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "process-new-retently-survey-responses-to-create-or-update-accelo-contacts",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create/Update Contact",
+      "action": "create_contact",
+      "selectedApi": "AcceloCLIAPI@1.29.2",
+      "typeOf": "write",
+      "app": {
+        "id": "0ccd0f63-4ac5-417e-9026-9a99d572b28e",
+        "slug": "accelo",
+        "name": "Accelo",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/93a23c7cd310288cd40df929988cb9b9.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/93a23c7cd310288cd40df929988cb9b9.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 4997,
+    "primaryColor": "209bd1",
+    "slug": "accelo",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/45a45992500df14e741d56700152ebc7.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Klaviyo",
+      "isPremium": false,
+      "slug": "klaviyo",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1313548",
+  "id": "1375c64f-b00c-4097-b7b7-897556c36b88",
+  "title": "Unsubscribe customers in Retently when new events occur in Klaviyo",
+  "url": "/apps/klaviyo/integrations/retently/1313548/unsubscribe-customers-in-retently-when-new-events-occur-in-klaviyo",
+  "legacyId": "1313548",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Stay on top of unsubscribes and maintain a clean email list with this Klaviyo to Retently automation. When a new event occurs in Klaviyo, it will trigger an unsubscribe customer action in Retently. This workflow ensures you're always up to date with your customer's preferences while enhancing your campaign effectiveness."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "unsubscribe-customers-in-retently-when-new-events-occur-in-klaviyo",
+  "steps": [
+    {
+      "label": "New Event",
+      "action": "event_v3",
+      "selectedApi": "KlaviyoCLIAPI@2.2.2",
+      "typeOf": "read",
+      "app": {
+        "id": "c6d445ef-c8e3-4047-8ee2-1e830a7da187",
+        "slug": "klaviyo",
+        "name": "Klaviyo",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/45a45992500df14e741d56700152ebc7.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/45a45992500df14e741d56700152ebc7.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Unsubscribe Customer",
+      "action": "unsubscribe",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/296388d714e0dcd78105c9b165ca751e.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Microsoft Excel",
+      "isPremium": false,
+      "slug": "excel",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1388227",
+  "id": "c559d66b-ff82-4301-b4dd-1d42b8e08457",
+  "title": "Update Microsoft Excel rows when Retently campaign scores are updated",
+  "url": "/apps/excel/integrations/retently/1388227/update-microsoft-excel-rows-when-retently-campaign-scores-are-updated",
+  "legacyId": "1388227",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Keep your Excel spreadsheets up-to-date with Retently campaign scores using this seamless workflow. When a campaign score is updated in Retently, the corresponding row will be updated in Microsoft Excel, ensuring accurate and timely data for your team. Save time and reduce manual errors by streamlining your data management process with this efficient automation."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "update-microsoft-excel-rows-when-retently-campaign-scores-are-updated",
+  "steps": [
+    {
+      "label": "Campaign Score Updated",
+      "action": "score_by_campaign",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Update Row",
+      "action": "update_row",
+      "selectedApi": "ExcelCLIAPI@1.4.2",
+      "typeOf": "write",
+      "app": {
+        "id": "609390d8-8cff-4426-9c2e-293bd6b89a0b",
+        "slug": "excel",
+        "name": "Microsoft Excel",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/296388d714e0dcd78105c9b165ca751e.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/296388d714e0dcd78105c9b165ca751e.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 2901,
+    "primaryColor": "207245",
+    "slug": "excel",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/4272c5e2ab94f0fe57fc3623f2940ad8.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Clio",
+      "isPremium": false,
+      "slug": "clio",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1482542",
+  "id": "1b30b96e-2827-441f-a7c0-a095588a2a68",
+  "title": "Unsubscribe Retently customers when new Clio contacts are added",
+  "url": "/apps/clio/integrations/retently/1482542/unsubscribe-retently-customers-when-new-clio-contacts-are-added",
+  "legacyId": "1482542",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Effortlessly manage your contact list and enhance customer satisfaction with this seamless integration between Clio and Retently. When a new contact is added in Clio, this workflow ensures they are included in Retently's customer feedback process. Keep your contact list up-to-date and concentrate on delivering an exceptional experience to your clients without manual intervention."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "unsubscribe-retently-customers-when-new-clio-contacts-are-added",
+  "steps": [
+    {
+      "label": "New Contact",
+      "action": "contact",
+      "selectedApi": "ClioCLIAPI@1.14.1",
+      "typeOf": "read",
+      "app": {
+        "id": "a8c96f72-5058-4501-922e-49f22e665224",
+        "slug": "clio",
+        "name": "Clio",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/4272c5e2ab94f0fe57fc3623f2940ad8.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/4272c5e2ab94f0fe57fc3623f2940ad8.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Unsubscribe Customer",
+      "action": "unsubscribe",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/d30b61a9b64d1cfd1077681aebb72689.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Wealthbox CRM",
+      "isPremium": false,
+      "slug": "wealthbox",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1491205",
+  "id": "4200a6e2-1227-4c95-9780-3b394371df93",
+  "title": "Unsubscribe customers in Retently when new contacts are added to Wealthbox CRM",
+  "url": "/apps/retently/integrations/wealthbox/1491205/unsubscribe-customers-in-retently-when-new-contacts-are-added-to-wealthbox-crm",
+  "legacyId": "1491205",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Effortlessly manage your unsubscribed contacts with this seamless workflow between Wealthbox CRM and Retently. When a new contact is added in Wealthbox CRM, this process will instantly update their subscription status in Retently. Maintain an organized mailing list and focus on more critical tasks for your business, while ensuring your contacts stay updated on both platforms."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "unsubscribe-customers-in-retently-when-new-contacts-are-added-to-wealthbox-crm",
+  "steps": [
+    {
+      "label": "New Contact",
+      "action": "contact_created",
+      "selectedApi": "WealthboxCLIAPI@1.56.7",
+      "typeOf": "read",
+      "app": {
+        "id": "68c58000-5fe9-4df5-9566-73342e3616dd",
+        "slug": "wealthbox",
+        "name": "Wealthbox CRM",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/d30b61a9b64d1cfd1077681aebb72689.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/d30b61a9b64d1cfd1077681aebb72689.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Unsubscribe Customer",
+      "action": "unsubscribe",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/bec09826ed23eb439c1d9f47d2f5fab7.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Marketo",
+      "isPremium": true,
+      "slug": "marketo",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1495829",
+  "id": "fe728a95-90e0-4d9f-ad6f-e33a60ee02ca",
+  "title": "Unsubscribe new Retently customers from Marketo leads",
+  "url": "/apps/marketo/integrations/retently/1495829/unsubscribe-new-retently-customers-from-marketo-leads",
+  "legacyId": "1495829",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Easily manage your leads and keep your email lists clean with this Marketo and Retently workflow. Whenever a new lead is created in Marketo, it will automatically unsubscribe the customer in Retently, ensuring you're only sending emails to those who want them. Stay compliant and maintain healthy relationships with your leads by using this seamless automation."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "unsubscribe-new-retently-customers-from-marketo-leads",
+  "steps": [
+    {
+      "label": "New Lead",
+      "action": "new_lead",
+      "selectedApi": "MarketoCLIAPI@1.3.4",
+      "typeOf": "read",
+      "app": {
+        "id": "9a7ddb73-abff-48a3-81e6-79c28ba58767",
+        "slug": "marketo",
+        "name": "Marketo",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/bec09826ed23eb439c1d9f47d2f5fab7.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/bec09826ed23eb439c1d9f47d2f5fab7.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Unsubscribe Customer",
+      "action": "unsubscribe",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/5a314b8ce57b01ea6c147a03542cbaeb_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Mojo",
+      "isPremium": false,
+      "slug": "mojo",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1517586",
+  "id": "473f32a3-b026-40f4-af1b-f9cc9f7318b4",
+  "title": "Unsubscribe Retently customers when new Mojo contacts are added",
+  "url": "/apps/mojo/integrations/retently/1517586/unsubscribe-retently-customers-when-new-mojo-contacts-are-added",
+  "legacyId": "1517586",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Effortlessly manage new contacts and their communication preferences with this workflow. When a new contact is added in Mojo, they will be automatically unsubscribed from Retently's mailing list. This ensures that your customers' preferences are respected, and your communications remain GDPR-compliant without any manual effort."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "unsubscribe-retently-customers-when-new-mojo-contacts-are-added",
+  "steps": [
+    {
+      "label": "New Contact",
+      "action": "contact_created_v3",
+      "selectedApi": "MojoCLIAPI@1.1.7",
+      "typeOf": "read",
+      "app": {
+        "id": "141824e3-df7c-4fe7-8198-8befc7011fbf",
+        "slug": "mojo",
+        "name": "Mojo",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/5a314b8ce57b01ea6c147a03542cbaeb_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/5a314b8ce57b01ea6c147a03542cbaeb_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Unsubscribe Customer",
+      "action": "unsubscribe",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/8913a06feb7556d01285c052e4ad59d0.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Google Sheets",
+      "isPremium": false,
+      "slug": "google-sheets",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1607838",
+  "id": "4dd38a03-6158-4b79-ab9b-887826da27a7",
+  "title": "Create spreadsheet rows in Google Sheets for new survey responses in Retently",
+  "url": "/apps/google-sheets/integrations/retently/1607838/create-spreadsheet-rows-in-google-sheets-for-new-survey-responses-in-retently",
+  "legacyId": "1607838",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "This workflow initiates once there's a new survey response in Retently, promptly adding a row in Google Sheets with all the survey data. This automation makes it easy to organize and analyze your Retently surveys data in real-time, keeping your records up-to-date and easily accessible all within your Google Sheets. You'll appreciate the simplicity and efficiency this integration brings to managing your survey data."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "create-spreadsheet-rows-in-google-sheets-for-new-survey-responses-in-retently",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create Spreadsheet Row",
+      "action": "add_row",
+      "selectedApi": "GoogleSheetsV2API",
+      "typeOf": "write",
+      "app": {
+        "id": "0d71fb90-f233-4ce0-bdb1-3a2c887dfadf",
+        "slug": "google-sheets",
+        "name": "Google Sheets",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/8913a06feb7556d01285c052e4ad59d0.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/8913a06feb7556d01285c052e4ad59d0.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 1498,
+    "primaryColor": "00a256",
+    "slug": "google-sheets",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/296388d714e0dcd78105c9b165ca751e.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Microsoft Excel",
+      "isPremium": false,
+      "slug": "excel",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1621187",
+  "id": "ad5da6ce-62ad-49f9-89b6-b6a706d5062a",
+  "title": "Add new rows in Microsoft Excel when new survey responses are captured in Retently",
+  "url": "/apps/excel/integrations/retently/1621187/add-new-rows-in-microsoft-excel-when-new-survey-responses-are-captured-in-retently",
+  "legacyId": "1621187",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Manage your feedback system seamlessly with this workflow. When a new survey response is recorded in Retently, it directly adds a corresponding row in your Microsoft Excel. This offers an efficient way to compile all survey responses, reducing manual data entry and keeping your Excel sheets up to date. Save time and maintain a smoother feedback process with this automated solution."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "add-new-rows-in-microsoft-excel-when-new-survey-responses-are-captured-in-retently",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Add Row",
+      "action": "add_row",
+      "selectedApi": "ExcelCLIAPI@1.4.2",
+      "typeOf": "write",
+      "app": {
+        "id": "609390d8-8cff-4426-9c2e-293bd6b89a0b",
+        "slug": "excel",
+        "name": "Microsoft Excel",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/296388d714e0dcd78105c9b165ca751e.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/296388d714e0dcd78105c9b165ca751e.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 2901,
+    "primaryColor": "207245",
+    "slug": "excel",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/8d2fe52ddbf8b9441bfcad4a38deaab5.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Google BigQuery",
+      "isPremium": true,
+      "slug": "google-bigquery",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1624496",
+  "id": "cca5df2d-4e58-4d72-928a-76ddd880e4c3",
+  "title": "Create rows in Google BigQuery for new survey responses in Retently",
+  "url": "/apps/google-bigquery/integrations/retently/1624496/create-rows-in-google-bigquery-for-new-survey-responses-in-retently",
+  "legacyId": "1624496",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "When a new survey response is captured in Retently, let this automation efficiently carry out the data management task for you. It takes the newly recorded responses and organizes them into a new row in your Google BigQuery, ensuring your data is immediately updated and centrally stored for easy access and analysis. Not only does this save you time, but it allows for quicker, data-driven decisions based on real-time insights."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "create-rows-in-google-bigquery-for-new-survey-responses-in-retently",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create Row",
+      "action": "create_row",
+      "selectedApi": "GoogleBigQueryCLIAPI@1.14.6",
+      "typeOf": "write",
+      "app": {
+        "id": "f01dd09c-0d38-47b9-ae32-1701930d2275",
+        "slug": "google-bigquery",
+        "name": "Google BigQuery",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/8d2fe52ddbf8b9441bfcad4a38deaab5.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/8d2fe52ddbf8b9441bfcad4a38deaab5.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 15158,
+    "primaryColor": "db4437",
+    "slug": "google-bigquery",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/ee5639541837566725dfb217a7e027af_4.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Copper",
+      "isPremium": false,
+      "slug": "copper",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1650822",
+  "id": "864aad9f-3c93-42db-a010-e2ef894755af",
+  "title": "Update Retently customers whenever persons get updated in Copper",
+  "url": "/apps/copper/integrations/retently/1650822/update-retently-customers-whenever-persons-get-updated-in-copper",
+  "legacyId": "1650822",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Ensure your customer information is always up to date with this workflow. It springs into action when there's an updated person in your Copper app, and instantly reflects those changes in your Retently app by creating or updating a customer. This means you can spend less time on manual data transfers and more time growing your business."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "update-retently-customers-whenever-persons-get-updated-in-copper",
+  "steps": [
+    {
+      "label": "Updated Person",
+      "action": "update_contact_v3",
+      "selectedApi": "CopperCLIAPI@2.0.11",
+      "typeOf": "read",
+      "app": {
+        "id": "a02e500a-ad6a-45ce-8806-8c14616f7740",
+        "slug": "copper",
+        "name": "Copper",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/ee5639541837566725dfb217a7e027af_4.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/ee5639541837566725dfb217a7e027af_4.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create or Update Customer",
+      "action": "customer",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/ee5639541837566725dfb217a7e027af_4.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Copper",
+      "isPremium": false,
+      "slug": "copper",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1652839",
+  "id": "3ea7fa53-8f6a-4343-8ed8-19f4e73d849c",
+  "title": "Manage new Copper persons by creating or updating customers in Retently",
+  "url": "/apps/copper/integrations/retently/1652839/manage-new-copper-persons-by-creating-or-updating-customers-in-retently",
+  "legacyId": "1652839",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Easily manage your customer data between Copper and Retently with this efficient workflow. When a new person is added in Copper, this workflow will ensure their details are also recorded or updated in Retently. Save valuable time and keep your customer information up-to-date across platforms with this streamlined process."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "manage-new-copper-persons-by-creating-or-updating-customers-in-retently",
+  "steps": [
+    {
+      "label": "New Person",
+      "action": "new_contact_v2",
+      "selectedApi": "CopperCLIAPI@2.0.11",
+      "typeOf": "read",
+      "app": {
+        "id": "a02e500a-ad6a-45ce-8806-8c14616f7740",
+        "slug": "copper",
+        "name": "Copper",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/ee5639541837566725dfb217a7e027af_4.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/ee5639541837566725dfb217a7e027af_4.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create or Update Customer",
+      "action": "customer",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/ae42824b58d556d36b5e5b217377fc5e.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Google Docs",
+      "isPremium": false,
+      "slug": "google-docs",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1672757",
+  "id": "4a6a33da-dbea-46a9-b46c-e70ec5c8a42d",
+  "title": "Send an email survey in Retently for every new document in Google Docs",
+  "url": "/apps/google-docs/integrations/retently/1672757/send-an-email-survey-in-retently-for-every-new-document-in-google-docs",
+  "legacyId": "1672757",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Automate your survey process with this efficient workflow. Every time a new document is created in Google Docs, an email survey is sent out via Retently. This seamless integration ensures promptness in your survey distribution process, allowing you to gather necessary feedback from your audience more effectively and in a timely manner."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "send-an-email-survey-in-retently-for-every-new-document-in-google-docs",
+  "steps": [
+    {
+      "label": "New Document",
+      "action": "document",
+      "selectedApi": "GoogleDocsV2CLIAPI@1.0.4",
+      "typeOf": "read",
+      "app": {
+        "id": "9e67310a-a6bb-4dcc-8055-0cd8694d6994",
+        "slug": "google-docs",
+        "name": "Google Docs",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/ae42824b58d556d36b5e5b217377fc5e.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/ae42824b58d556d36b5e5b217377fc5e.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Send an Email Survey",
+      "action": "survey",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "write",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5275,
+    "primaryColor": "005fb2",
+    "slug": "retently",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/ae42824b58d556d36b5e5b217377fc5e.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Google Docs",
+      "isPremium": false,
+      "slug": "google-docs",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1680241",
+  "id": "ac381743-9083-4ee8-a3e5-4d42f14bb63e",
+  "title": "Create Google Docs documents from new Retently survey responses",
+  "url": "/apps/google-docs/integrations/retently/1680241/create-google-docs-documents-from-new-retently-survey-responses",
+  "legacyId": "1680241",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Streamline your survey response management with this seamless workflow. Upon receiving a new survey response in Retently, a document with the response data is instantly created in Google Docs. This allows for an organized and efficient way to store and analyze your survey data, saving you time and improving your response rate tracking."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "create-google-docs-documents-from-new-retently-survey-responses",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Create Document From Text",
+      "action": "newtxtdocument",
+      "selectedApi": "GoogleDocsV2CLIAPI@1.0.4",
+      "typeOf": "write",
+      "app": {
+        "id": "9e67310a-a6bb-4dcc-8055-0cd8694d6994",
+        "slug": "google-docs",
+        "name": "Google Docs",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/ae42824b58d556d36b5e5b217377fc5e.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/ae42824b58d556d36b5e5b217377fc5e.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 12,
+    "primaryColor": "4f8df5",
+    "slug": "google-docs",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+},
+{
+  "visibleToSearchEngines": true,
+  "apps": [
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Retently",
+      "isPremium": false,
+      "slug": "retently",
+      "__typename": "App"
+    },
+    {
+      "logo": {
+        "mainUrl": "https://zapier-images.imgix.net/storage/services/22d6681f64c79dd71a34066afe1c54e2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+        "__typename": "AppLogo"
+      },
+      "name": "Microsoft Teams",
+      "isPremium": false,
+      "slug": "microsoft-teams",
+      "__typename": "App"
+    }
+  ],
+  "editorUrl": "/webintent/create-zap?template=1802445",
+  "id": "5bf26ba2-cf00-46b9-afe0-2fd38abf697d",
+  "title": "Post new Retently survey responses as channel messages in Microsoft Teams",
+  "url": "/apps/microsoft-teams/integrations/retently/1802445/post-new-retently-survey-responses-as-channel-messages-in-microsoft-teams",
+  "legacyId": "1802445",
+  "descriptionHtmlAst": {
+    "tagName": null,
+    "rawAttrs": "",
+    "childNodes": [
+      {
+        "tagName": "p",
+        "rawAttrs": "",
+        "childNodes": [
+          {
+            "rawText": "Get instant updates about new survey responses from Retently on your Microsoft Teams channel. This workflow allows you to directly receive survey responses on your desired Teams channel, helping you to monitor customer feedback in real-time. No need to toggle between apps or wait for the response summary, as all the updates are effectively streamed straight to your Microsoft Teams. This not only saves time but also fosters more informed and quicker decision making."
+          }
+        ],
+        "classNames": []
+      }
+    ],
+    "classNames": []
+  },
+  "slug": "post-new-retently-survey-responses-as-channel-messages-in-microsoft-teams",
+  "steps": [
+    {
+      "label": "New Survey Response",
+      "action": "response",
+      "selectedApi": "RetentlyNPSCLIAPI@2.0.2",
+      "typeOf": "read",
+      "app": {
+        "id": "9fdfd2a8-d6f4-44ea-810f-edb6a9c5c8f7",
+        "slug": "retently",
+        "name": "Retently",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/developer/fc981ab623edf239769c856651c6bbac_2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    },
+    {
+      "label": "Send Channel Message",
+      "action": "send_channel_message",
+      "selectedApi": "MSTeamsCLIAPI@2.6.1",
+      "typeOf": "write",
+      "app": {
+        "id": "017e504c-21c6-489d-bb5b-c8662f64ce53",
+        "slug": "microsoft-teams",
+        "name": "Microsoft Teams",
+        "logo": {
+          "smallUrl": "https://zapier-images.imgix.net/storage/services/22d6681f64c79dd71a34066afe1c54e2.png?auto=format%2Ccompress&fit=crop&h=32&ixlib=python-3.0.0&q=50&w=32",
+          "mainUrl": "https://zapier-images.imgix.net/storage/services/22d6681f64c79dd71a34066afe1c54e2.png?auto=format%2Ccompress&ixlib=python-3.0.0&q=50",
+          "__typename": "AppLogo"
+        },
+        "__typename": "App"
+      },
+      "__typename": "ZapTemplateStep"
+    }
+  ],
+  "tailApp": {
+    "legacyId": 5077,
+    "primaryColor": "5558AF",
+    "slug": "microsoft-teams",
+    "__typename": "App"
+  },
+  "__typename": "ZapTemplate"
+}]

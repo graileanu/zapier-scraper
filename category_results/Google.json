@@ -1,0 +1,29 @@
+{
+  "category": "Google",
+  "url": "https://zapier.com/apps/categories/google",
+  "scrapedAt": "2024-11-30T08:46:58.859Z",
+  "totalUrls": 21,
+  "urls": [
+    "https://zapier.com/apps/google-sheets/integrations",
+    "https://zapier.com/apps/gmail/integrations",
+    "https://zapier.com/apps/google-calendar/integrations",
+    "https://zapier.com/apps/google-drive/integrations",
+    "https://zapier.com/apps/google-forms/integrations",
+    "https://zapier.com/apps/youtube/integrations",
+    "https://zapier.com/apps/google-docs/integrations",
+    "https://zapier.com/apps/google-contacts/integrations",
+    "https://zapier.com/apps/google-ads/integrations",
+    "https://zapier.com/apps/google-tasks/integrations",
+    "https://zapier.com/apps/interfaces/integrations",
+    "https://zapier.com/apps/google-business-profile/integrations",
+    "https://zapier.com/apps/google-chat/integrations",
+    "https://zapier.com/apps/google-slides/integrations",
+    "https://zapier.com/apps/google-ai-studio/integrations",
+    "https://zapier.com/apps/google-bigquery/integrations",
+    "https://zapier.com/apps/google-analytics-4/integrations",
+    "https://zapier.com/apps/google-meet/integrations",
+    "https://zapier.com/apps/google-workspace-admin/integrations",
+    "https://zapier.com/apps/google-groups/integrations",
+    "https://zapier.com/apps/google-vertex-ai/integrations"
+  ]
+}

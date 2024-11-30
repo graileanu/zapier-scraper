@@ -1,0 +1,77 @@
+{
+  "title": "NetSuite Integrations",
+  "isPremium": false,
+  "about": "NetSuite is a cloud-based ERP that provides accounting services, financial management, CRM, inventory management, e-commerce and more",
+  "logo": "https://zapier-images.imgix.net/storage/developer_cli/62f9bb7ff5f233d7e986dbbf5f309345.png?auto=format&ixlib=react-9.8.1&q=50&fit=crop&h=60&w=60",
+  "helpLinks": [
+    "https://help.zapier.com/hc/en-us",
+    "https://help.zapier.com/hc/en-us/articles/28889969573773-How-to-get-started-with-NetSuite-on-Zapier"
+  ],
+  "categories": [],
+  "triggers": [],
+  "actions": [
+    {
+      "name": "New Record",
+      "description": "Triggers when a new record is created. Supports standard and custom records"
+    },
+    {
+      "name": "New Or Updated Record",
+      "description": "Triggers when a record is created or updated. Supports standard and custom records"
+    },
+    {
+      "name": "Delete Record",
+      "description": "Deletes an existing record. Supports standard and custom records."
+    },
+    {
+      "name": "Run SuiteQL Query",
+      "description": "Executes an SuiteQL query over the records."
+    },
+    {
+      "name": "Update RecordUpdates an existing record",
+      "description": "Supports standard and custom records."
+    },
+    {
+      "name": "Create or Update RecordCreates a new record if it does not exist",
+      "description": "If the record already exists, it will be updated. Supports standard and custom records."
+    },
+    {
+      "name": "Find RecordFinds a record based on search field(s) of your choice",
+      "description": "Supports Standard and Custom NetSuite record types"
+    },
+    {
+      "name": "Get Record Type (Object) SchemaRetrieves details &amp; metadata on a record type/object of your choice a record based on search field(s) of your choice",
+      "description": "Supports Standard and Custom NetSuite record types"
+    },
+    {
+      "name": "New Record (Saved Search)",
+      "description": "Triggers when a new record enters your saved search results"
+    },
+    {
+      "name": "Attach Existing File to Record",
+      "description": "Attach a file from file cabinet to a record."
+    },
+    {
+      "name": "Detach File from Record",
+      "description": "Removes an existing file from file cabinet from a record"
+    },
+    {
+      "name": "Create Record",
+      "description": "Creates a new record. Supports standard and custom records"
+    },
+    {
+      "name": "Upload File to File CabinetUploads a new file to the File Cabinet.",
+      "description": null
+    },
+    {
+      "name": "Find File In File CabinetFinds a file in file cabinet based on search criteria.",
+      "description": null
+    },
+    {
+      "name": "Find Records (with line-item support)Finds and returns a max of 25 Standard/Custom records that match your search.",
+      "description": null
+    }
+  ],
+  "sourceCategory": "AI Tools",
+  "url": "https://zapier.com/apps/netsuite/integrations",
+  "scrapedAt": "2024-11-30T12:16:29.107Z"
+}

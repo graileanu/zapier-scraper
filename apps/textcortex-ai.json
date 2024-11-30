@@ -1,0 +1,49 @@
+{
+  "title": "TextCortex AI Integrations",
+  "isPremium": false,
+  "about": "TextCortex AI offers NLP capabilities, enabling developers to efficiently integrate language-based features into their applications.",
+  "logo": "https://zapier-images.imgix.net/storage/developer_cli/1c6eca8a6d1027f38455859c8bc63945.png?auto=format&ixlib=react-9.8.1&q=50&fit=crop&h=60&w=60",
+  "helpLinks": [
+    "https://help.zapier.com/hc/en-us",
+    "https://help.zapier.com/hc/en-us/articles/15605642136589-How-to-get-started-with-TextCortex-AI-on-Zapier"
+  ],
+  "categories": [],
+  "triggers": [],
+  "actions": [
+    {
+      "name": "Create Code",
+      "description": "Generates code in the specified programming language according to the given description of the purpose."
+    },
+    {
+      "name": "Create Email",
+      "description": "Creates an email with the given details"
+    },
+    {
+      "name": "Create Product Description",
+      "description": "Creates a product description with the given details"
+    },
+    {
+      "name": "Create Summary",
+      "description": "Summarizes the given text."
+    },
+    {
+      "name": "Send Prompt",
+      "description": "Sends a prompt to TextCortex API and generates a completion."
+    },
+    {
+      "name": "Create Paraphrase",
+      "description": "Rewrites the given text without changing its meaning."
+    },
+    {
+      "name": "Create Social Media Caption",
+      "description": "Create a social media caption for the specified channel."
+    },
+    {
+      "name": "Create Translation",
+      "description": "Translates a text into another language."
+    }
+  ],
+  "sourceCategory": "AI Tools",
+  "url": "https://zapier.com/apps/textcortex-ai/integrations",
+  "scrapedAt": "2024-11-30T12:27:37.046Z"
+}

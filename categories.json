@@ -1,0 +1,338 @@
+[
+  {
+    "name": "All App Families",
+    "url": "https://zapier.com/apps/categories/app-families"
+  },
+  {
+    "name": "Amazon",
+    "url": "https://zapier.com/apps/categories/aws"
+  },
+  {
+    "name": "Facebook",
+    "url": "https://zapier.com/apps/categories/facebook"
+  },
+  {
+    "name": "Google",
+    "url": "https://zapier.com/apps/categories/google"
+  },
+  {
+    "name": "Microsoft",
+    "url": "https://zapier.com/apps/categories/microsoft"
+  },
+  {
+    "name": "WordPress",
+    "url": "https://zapier.com/apps/categories/wordpress"
+  },
+  {
+    "name": "Zapier",
+    "url": "https://zapier.com/apps/categories/zapier-tools"
+  },
+  {
+    "name": "Zoho",
+    "url": "https://zapier.com/apps/categories/zoho"
+  },
+  {
+    "name": "All Artificial Intelligence",
+    "url": "https://zapier.com/apps/categories/artificial-intelligence"
+  },
+  {
+    "name": "AI Tools",
+    "url": "https://zapier.com/apps/categories/ai-tools"
+  },
+  {
+    "name": "All Business Intelligence",
+    "url": "https://zapier.com/apps/categories/business-intelligence"
+  },
+  {
+    "name": "Analytics",
+    "url": "https://zapier.com/apps/categories/analytics"
+  },
+  {
+    "name": "Dashboards",
+    "url": "https://zapier.com/apps/categories/dashboards"
+  },
+  {
+    "name": "Reviews",
+    "url": "https://zapier.com/apps/categories/reviews"
+  },
+  {
+    "name": "All Commerce",
+    "url": "https://zapier.com/apps/categories/commerce"
+  },
+  {
+    "name": "Accounting",
+    "url": "https://zapier.com/apps/categories/accounting"
+  },
+  {
+    "name": "eCommerce",
+    "url": "https://zapier.com/apps/categories/ecommerce"
+  },
+  {
+    "name": "Fundraising",
+    "url": "https://zapier.com/apps/categories/fundraising"
+  },
+  {
+    "name": "Payment Processing",
+    "url": "https://zapier.com/apps/categories/payment-processing"
+  },
+  {
+    "name": "Proposal & Invoice Management",
+    "url": "https://zapier.com/apps/categories/invoices"
+  },
+  {
+    "name": "Taxes",
+    "url": "https://zapier.com/apps/categories/tax"
+  },
+  {
+    "name": "All Communication",
+    "url": "https://zapier.com/apps/categories/communication"
+  },
+  {
+    "name": "Call Tracking",
+    "url": "https://zapier.com/apps/categories/call-tracking"
+  },
+  {
+    "name": "Email",
+    "url": "https://zapier.com/apps/categories/email"
+  },
+  {
+    "name": "Fax",
+    "url": "https://zapier.com/apps/categories/fax"
+  },
+  {
+    "name": "Notifications",
+    "url": "https://zapier.com/apps/categories/notifications"
+  },
+  {
+    "name": "Phone & SMS",
+    "url": "https://zapier.com/apps/categories/phone"
+  },
+  {
+    "name": "Team Chat",
+    "url": "https://zapier.com/apps/categories/team-chat"
+  },
+  {
+    "name": "Team Collaboration",
+    "url": "https://zapier.com/apps/categories/team-collaboration"
+  },
+  {
+    "name": "Video Conferencing",
+    "url": "https://zapier.com/apps/categories/video-calls"
+  },
+  {
+    "name": "All Content & Files",
+    "url": "https://zapier.com/apps/categories/content-files"
+  },
+  {
+    "name": "Documents",
+    "url": "https://zapier.com/apps/categories/documents"
+  },
+  {
+    "name": "File Management & Storage",
+    "url": "https://zapier.com/apps/categories/files"
+  },
+  {
+    "name": "Images & Design",
+    "url": "https://zapier.com/apps/categories/images"
+  },
+  {
+    "name": "Notes",
+    "url": "https://zapier.com/apps/categories/notes"
+  },
+  {
+    "name": "Transcription",
+    "url": "https://zapier.com/apps/categories/transcription"
+  },
+  {
+    "name": "Video & Audio",
+    "url": "https://zapier.com/apps/categories/video"
+  },
+  {
+    "name": "All Human Resources",
+    "url": "https://zapier.com/apps/categories/human-resources"
+  },
+  {
+    "name": "Education",
+    "url": "https://zapier.com/apps/categories/education"
+  },
+  {
+    "name": "HR Talent & Recruitment",
+    "url": "https://zapier.com/apps/categories/hr"
+  },
+  {
+    "name": "All Internet of Things",
+    "url": "https://zapier.com/apps/categories/internet-of-things"
+  },
+  {
+    "name": "Devices",
+    "url": "https://zapier.com/apps/categories/devices"
+  },
+  {
+    "name": "Printing",
+    "url": "https://zapier.com/apps/categories/printing"
+  },
+  {
+    "name": "All IT Operations",
+    "url": "https://zapier.com/apps/categories/it-operations"
+  },
+  {
+    "name": "Databases",
+    "url": "https://zapier.com/apps/categories/databases"
+  },
+  {
+    "name": "Developer Tools",
+    "url": "https://zapier.com/apps/categories/developer-tools"
+  },
+  {
+    "name": "Online Courses",
+    "url": "https://zapier.com/apps/categories/it-operations-education"
+  },
+  {
+    "name": "Security & Identity Tools",
+    "url": "https://zapier.com/apps/categories/security-identity"
+  },
+  {
+    "name": "Server Monitoring",
+    "url": "https://zapier.com/apps/categories/server-monitoring"
+  },
+  {
+    "name": "All Lifestyle & Entertainment",
+    "url": "https://zapier.com/apps/categories/lifestyle-entertainment"
+  },
+  {
+    "name": "Fitness",
+    "url": "https://zapier.com/apps/categories/fitness"
+  },
+  {
+    "name": "Gaming",
+    "url": "https://zapier.com/apps/categories/gaming"
+  },
+  {
+    "name": "News & Lifestyle",
+    "url": "https://zapier.com/apps/categories/news"
+  },
+  {
+    "name": "All Marketing",
+    "url": "https://zapier.com/apps/categories/marketing"
+  },
+  {
+    "name": "Ads & Conversion",
+    "url": "https://zapier.com/apps/categories/ads-conversion"
+  },
+  {
+    "name": "Drip Emails",
+    "url": "https://zapier.com/apps/categories/drip-emails"
+  },
+  {
+    "name": "Email Newsletters",
+    "url": "https://zapier.com/apps/categories/email-newsletters"
+  },
+  {
+    "name": "Event Management",
+    "url": "https://zapier.com/apps/categories/event-management"
+  },
+  {
+    "name": "Marketing Automation",
+    "url": "https://zapier.com/apps/categories/marketing-automation"
+  },
+  {
+    "name": "Social Media Accounts",
+    "url": "https://zapier.com/apps/categories/social"
+  },
+  {
+    "name": "Social Media Marketing",
+    "url": "https://zapier.com/apps/categories/social-marketing"
+  },
+  {
+    "name": "Transactional Email",
+    "url": "https://zapier.com/apps/categories/transactional-email"
+  },
+  {
+    "name": "URL Shortener",
+    "url": "https://zapier.com/apps/categories/url-shorten"
+  },
+  {
+    "name": "Webinars",
+    "url": "https://zapier.com/apps/categories/webinars"
+  },
+  {
+    "name": "All Productivity",
+    "url": "https://zapier.com/apps/categories/productivity"
+  },
+  {
+    "name": "Bookmark Managers",
+    "url": "https://zapier.com/apps/categories/bookmarks"
+  },
+  {
+    "name": "Calendar",
+    "url": "https://zapier.com/apps/categories/calendar"
+  },
+  {
+    "name": "Product Management",
+    "url": "https://zapier.com/apps/categories/product-management"
+  },
+  {
+    "name": "Project Management",
+    "url": "https://zapier.com/apps/categories/project-management"
+  },
+  {
+    "name": "Spreadsheets",
+    "url": "https://zapier.com/apps/categories/spreadsheets"
+  },
+  {
+    "name": "Task Management",
+    "url": "https://zapier.com/apps/categories/todo-lists"
+  },
+  {
+    "name": "Time Tracking Software",
+    "url": "https://zapier.com/apps/categories/time-tracking"
+  },
+  {
+    "name": "All Sales & CRM",
+    "url": "https://zapier.com/apps/categories/sales-crm"
+  },
+  {
+    "name": "Contact Management",
+    "url": "https://zapier.com/apps/categories/contacts"
+  },
+  {
+    "name": "CRM (Customer Relationship Management)",
+    "url": "https://zapier.com/apps/categories/crm"
+  },
+  {
+    "name": "Forms & Surveys",
+    "url": "https://zapier.com/apps/categories/forms"
+  },
+  {
+    "name": "Scheduling & Booking",
+    "url": "https://zapier.com/apps/categories/scheduling"
+  },
+  {
+    "name": "Signatures",
+    "url": "https://zapier.com/apps/categories/signatures"
+  },
+  {
+    "name": "All Support",
+    "url": "https://zapier.com/apps/categories/support"
+  },
+  {
+    "name": "Customer Appreciation",
+    "url": "https://zapier.com/apps/categories/customer-appreciation"
+  },
+  {
+    "name": "Customer Support",
+    "url": "https://zapier.com/apps/categories/customer-support"
+  },
+  {
+    "name": "All Website & App Building",
+    "url": "https://zapier.com/apps/categories/website-app-building"
+  },
+  {
+    "name": "App Builder",
+    "url": "https://zapier.com/apps/categories/app-builder"
+  },
+  {
+    "name": "Website Builders",
+    "url": "https://zapier.com/apps/categories/cms"
+  }
+]

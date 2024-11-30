@@ -1,0 +1,148 @@
+{
+  "title": "Salesforce Integrations",
+  "isPremium": false,
+  "about": "Salesforce is a leading enterprise customer relationship manager (CRM) application.",
+  "logo": "https://zapier-images.imgix.net/storage/services/1a4435539b4764e6ded3d368cabab387.png?auto=format&ixlib=react-9.8.1&q=50&fit=crop&h=60&w=60",
+  "helpLinks": [
+    "https://help.zapier.com/hc/en-us",
+    "https://help.zapier.com/hc/en-us/articles/30546219263245-Salesforce-error-Nothing-could-be-found-for-the-search",
+    "https://help.zapier.com/hc/en-us/articles/8496037541005-Common-Problems-with-Salesforce-on-Zapier",
+    "https://help.zapier.com/hc/en-us/articles/8496020846605-Tips-and-tricks-with-Salesforce-triggers-and-actions",
+    "https://help.zapier.com/hc/en-us/articles/8496020790925-How-to-get-started-with-Salesforce-on-Zapier"
+  ],
+  "categories": [],
+  "triggers": [],
+  "actions": [
+    {
+      "name": "New Case Attachment",
+      "description": "Triggers when a new Attachment is added to a case"
+    },
+    {
+      "name": "New Field History Tracking Event",
+      "description": "Triggers when a specific field is updated on a specific object. This trigger outputs the old value and the new value of the field"
+    },
+    {
+      "name": "New Outbound Message",
+      "description": "Triggers when a new outbound message is received in Salesforce"
+    },
+    {
+      "name": "Updated Field on Record",
+      "description": "Triggers when a field of your choosing (ie. email address, status) is updated on any record of a specified Salesforce object (ie. Contact, Lead, Opportunity, etc.)"
+    },
+    {
+      "name": "Add Contact to CampaignAdds an existing contact to an existing campaign.",
+      "description": null
+    },
+    {
+      "name": "Add Lead to CampaignAdds an existing lead to an existing campaign.",
+      "description": null
+    },
+    {
+      "name": "Create AttachmentCreates a new attachment (max 25MB).",
+      "description": null
+    },
+    {
+      "name": "Create ContactCreates a new contact in Salesforce.",
+      "description": null
+    },
+    {
+      "name": "Create LeadCreates a new lead in Salesforce.",
+      "description": null
+    },
+    {
+      "name": "Create RecordCreates a new record of a specified Salesforce object (ie",
+      "description": "Contact, Lead, Opportunity, etc.)."
+    },
+    {
+      "name": "Update ContactUpdates an existing contact in Salesforce.",
+      "description": null
+    },
+    {
+      "name": "Update RecordUpdates an existing record for a specified Salesforce object (ie",
+      "description": "Contact, Lead, Opportunity, etc.)."
+    },
+    {
+      "name": "API Request (Beta)This is an advanced action which makes a raw HTTP request that includes this integration's authentication.",
+      "description": null
+    },
+    {
+      "name": "Find RecordFinds a record of a specified Salesforce object by up to two fields and values you choose.",
+      "description": null
+    },
+    {
+      "name": "Find Record(s) by QueryFinds one or more records of a Salesforce object using a Salesforce Object Query (SOQL) WHERE clause (with line item support).",
+      "description": null
+    },
+    {
+      "name": "Find or Create RecordFind a record",
+      "description": "Optionally create a record if not found."
+    },
+    {
+      "name": "New Contact",
+      "description": "Triggers when a new Contact is created"
+    },
+    {
+      "name": "New Lead",
+      "description": "Triggers when a new Lead is created"
+    },
+    {
+      "name": "New Record",
+      "description": "Triggers when a record of the specified Salesforce object (ie. Contact, Lead, Opportunity, etc.) is created"
+    },
+    {
+      "name": "Updated Record",
+      "description": "Triggers when any record of the specified Salesforce object (ie. Contact, Lead, Opportunity, etc.) is updated"
+    },
+    {
+      "name": "Add File to RecordAdds an existing file to an existing Record.",
+      "description": null
+    },
+    {
+      "name": "Convert Lead to ContactAdds an existing contact to an existing campaign.",
+      "description": null
+    },
+    {
+      "name": "Create Child Records (with line item support)Creates records from line items and sets the parent-child relationship.",
+      "description": null
+    },
+    {
+      "name": "Create FileCreates a new File (max 25MB).",
+      "description": null
+    },
+    {
+      "name": "Create NoteCreates a new note and links it to a parent record",
+      "description": null
+    },
+    {
+      "name": "Create Record (UTC)Creates a new record of a specified Salesforce object (ie",
+      "description": "Contact, Lead, Opportunity, etc.)."
+    },
+    {
+      "name": "Update LeadUpdates an existing lead in Salesforce.",
+      "description": null
+    },
+    {
+      "name": "Update Record (UTC)Updates an existing record for a specified Salesforce object (ie",
+      "description": "Contact, Lead, Opportunity, etc.)."
+    },
+    {
+      "name": "Find Child RecordsFinds Child Records for a given Parent ID, and returns the Child records as line-items.",
+      "description": null
+    },
+    {
+      "name": "Find Record(s)Finds a record of a specified Salesforce object by a field and value you choose (with line-item support).",
+      "description": null
+    },
+    {
+      "name": "Find Record by QueryFinds a record of a Salesforce object using a Salesforce Object Query (SOQL) WHERE clause.",
+      "description": null
+    },
+    {
+      "name": "Find or Create Record by QueryFinds a record of a Salesforce object using a Salesforce Object Query (SOQL) WHERE clause",
+      "description": "Optionally create a record if not found."
+    }
+  ],
+  "sourceCategory": "AI Tools",
+  "url": "https://zapier.com/apps/salesforce/integrations",
+  "scrapedAt": "2024-11-30T12:27:42.698Z"
+}

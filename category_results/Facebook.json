@@ -1,0 +1,16 @@
+{
+  "category": "Facebook",
+  "url": "https://zapier.com/apps/categories/facebook",
+  "scrapedAt": "2024-11-30T08:45:01.891Z",
+  "totalUrls": 8,
+  "urls": [
+    "https://zapier.com/apps/facebook-lead-ads/integrations",
+    "https://zapier.com/apps/facebook-pages/integrations",
+    "https://zapier.com/apps/instagram/integrations",
+    "https://zapier.com/apps/facebook-conversions/integrations",
+    "https://zapier.com/apps/interfaces/integrations",
+    "https://zapier.com/apps/instagram-for-business/integrations",
+    "https://zapier.com/apps/facebook-messenger/integrations",
+    "https://zapier.com/apps/facebook-custom-audiences/integrations"
+  ]
+}

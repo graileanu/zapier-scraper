@@ -1,0 +1,222 @@
+{
+  "title": "Shopify Integrations",
+  "isPremium": false,
+  "about": "Shopify is a simple way to create an online store to list products, collect credit card payments, and ship your goods.",
+  "logo": "https://zapier-images.imgix.net/storage/services/4da9d3e3f93cd522f85e1b0695341f89.png?auto=format&ixlib=react-9.8.1&q=50&fit=crop&h=60&w=60",
+  "helpLinks": [
+    "https://help.zapier.com/hc/en-us",
+    "https://help.zapier.com/hc/en-us/articles/8495984022669-Common-Problems-with-Shopify",
+    "https://help.zapier.com/hc/en-us/articles/8495935490957-How-to-get-started-with-Shopify-on-Zapier"
+  ],
+  "categories": [],
+  "triggers": [],
+  "actions": [
+    {
+      "name": "New Blog",
+      "description": "Triggers when a new blog is added to your Shopify store"
+    },
+    {
+      "name": "New Customer",
+      "description": "Triggers when a new customer is added to your Shopify account"
+    },
+    {
+      "name": "New Fraudulent Order",
+      "description": "Triggers when an Order Risk Level is medium, high or both"
+    },
+    {
+      "name": "New Cancelled Order",
+      "description": "Triggers whenever an order is cancelled (with line item support)"
+    },
+    {
+      "name": "New Fulfilled Order",
+      "description": "when an order is fulfilled (with line item support)."
+    },
+    {
+      "name": "New Paid Order",
+      "description": "when an order is paid (with line item support)."
+    },
+    {
+      "name": "New Refund",
+      "description": "when a refund or partial refund occurs."
+    },
+    {
+      "name": "Updated Customer",
+      "description": "when a customer's information is updated."
+    },
+    {
+      "name": "Updated Order",
+      "description": "when an order is updated (with line item support)."
+    },
+    {
+      "name": "Add Line Item to OrderAdds a line item to an existing order.",
+      "description": null
+    },
+    {
+      "name": "Create Blog EntryCreates a new blog post.",
+      "description": null
+    },
+    {
+      "name": "Create Product VariantCreates a new product variant.",
+      "description": null
+    },
+    {
+      "name": "Create Draft OrderCreates a new draft order (with line item support).",
+      "description": null
+    },
+    {
+      "name": "Update Inventory Quantity (with line item support).Updates the quantity of existing product variants.",
+      "description": null
+    },
+    {
+      "name": "Create ProductCreates a new product.",
+      "description": null
+    },
+    {
+      "name": "Remove Tag from CustomerRemoves one or more tags from a customer.",
+      "description": null
+    },
+    {
+      "name": "Update CustomerUpdates an existing customer",
+      "description": "Replaces only data that is set."
+    },
+    {
+      "name": "Update Product VariantUpdates an existing product variant",
+      "description": "Replaces only data that is set."
+    },
+    {
+      "name": "API Request (Beta)This is an advanced action which makes a raw HTTP request that includes this integration's authentication.",
+      "description": null
+    },
+    {
+      "name": "Find OrderFinds an existing order.",
+      "description": null
+    },
+    {
+      "name": "Find MetafieldsSearches for Metafields data for a given resource (example order Metafields).",
+      "description": null
+    },
+    {
+      "name": "Find Products by ID (With Line Item Support)Finds multiple Products by IDs",
+      "description": "Returned as line items."
+    },
+    {
+      "name": "Find Product by TitleFinds a product by a title search.",
+      "description": null
+    },
+    {
+      "name": "Find Product Variant by SKUFinds a product variant by a SKU search.",
+      "description": null
+    },
+    {
+      "name": "Find or Create CustomerFinds or creates a specific customer.",
+      "description": null
+    },
+    {
+      "name": "Find or Create Product VariantFinds or creates a specific product variant by title.",
+      "description": null
+    },
+    {
+      "name": "New Blog Entry",
+      "description": "Triggers when a new entry is added to a blog in your Shopify store"
+    },
+    {
+      "name": "Customer Account Enabled",
+      "description": "Triggers when a customer account is enabled"
+    },
+    {
+      "name": "New Abandoned Cart",
+      "description": "Triggers whenever a cart is \"abandoned\" (only open carts) (with line item support)"
+    },
+    {
+      "name": "New Draft Order",
+      "description": "Triggers when a new draft order is created"
+    },
+    {
+      "name": "New Order",
+      "description": "when an order is created (with line item support)."
+    },
+    {
+      "name": "New Product",
+      "description": "when a product is created."
+    },
+    {
+      "name": "New Tag Added to Customer",
+      "description": "when a new tag is added to a customer."
+    },
+    {
+      "name": "Updated Inventory",
+      "description": "when an Inventory Item quantity is updated."
+    },
+    {
+      "name": "Updated Product",
+      "description": "when a Product is updated, ordered or when a variant is added, removed, or updated."
+    },
+    {
+      "name": "Add Tag to CustomerAdds one or more tags to a customer.",
+      "description": null
+    },
+    {
+      "name": "Create CompanyCreates a new company.",
+      "description": null
+    },
+    {
+      "name": "Create CustomerCreates a new customer.",
+      "description": null
+    },
+    {
+      "name": "Create FulfillmentCreates a fulfillment for one or many fulfillment orders that are associated with the same order and are assigned to the same location.",
+      "description": null
+    },
+    {
+      "name": "Create OrderCreates a new order (with line item support).",
+      "description": null
+    },
+    {
+      "name": "Publish ProductPublishes a product to a channel (e.g., a sales channel).",
+      "description": null
+    },
+    {
+      "name": "Create TransactionCreates a new Order Transaction.",
+      "description": null
+    },
+    {
+      "name": "Update OrderUpdates an existing order.",
+      "description": null
+    },
+    {
+      "name": "Update ProductUpdates an existing product",
+      "description": "Replaces only data that is set."
+    },
+    {
+      "name": "Find CustomerFinds a customer by name or email.",
+      "description": null
+    },
+    {
+      "name": "Get Order by IDLooks up an existing order by ID.",
+      "description": null
+    },
+    {
+      "name": "Find Order TransactionsFinds the Transactions associated to an Order.",
+      "description": null
+    },
+    {
+      "name": "Find Products by Title (With Line Item Support)Finds a list of products by searching the titles.",
+      "description": null
+    },
+    {
+      "name": "Find Product Variants by Title (With Line Item Support)Finds a list of product variants by searching the titles.",
+      "description": null
+    },
+    {
+      "name": "Find Product Variant by TitleFinds a product variant by a title search.",
+      "description": null
+    },
+    {
+      "name": "Find or Create ProductFinds or creates a specific product by title v2.",
+      "description": null
+    }
+  ],
+  "sourceCategory": "AI Tools",
+  "url": "https://zapier.com/apps/shopify/integrations",
+  "scrapedAt": "2024-11-30T12:09:07.329Z"
+}
