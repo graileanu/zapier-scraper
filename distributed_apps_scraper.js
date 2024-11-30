@@ -299,6 +299,30 @@ async function scrapeApp(page, url, categoryName) {
     }
   }
 
+async function checkLocalCache(appName) {
+  try {
+    await fs.access(path.join(CONFIG.LOCK_DIR, `${appName}.lock`));
+    return true; // File exists, app is cached as processed
+  } catch {
+    return false; // File doesn't exist
+  }
+}
+
+async function markLocalCache(appName) {
+  try {
+    await fs.mkdir(CONFIG.LOCK_DIR, { recursive: true });
+    await fs.writeFile(
+      path.join(CONFIG.LOCK_DIR, `${appName}.lock`),
+      JSON.stringify({
+        processed_at: new Date().toISOString(),
+        machine_id: MACHINE_ID
+      })
+    );
+  } catch (error) {
+    debug(`Error writing local cache for ${appName}:`, error.message);
+  }
+}
+
 async function processApp(page, url, categoryName, retryCount = 0) {
   const appName = url.split('/apps/')[1].split('/')[0];
   const outputPath = path.join(CONFIG.APPS_DIR, `${appName}.json`);
