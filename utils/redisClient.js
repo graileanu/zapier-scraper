@@ -50,10 +50,5 @@ const createRedisClient = () => {
   return client;
 };
 
-const redisClient = createRedisClient();
-
-redisClient.connect().catch((err) => {
-  console.error('Failed to connect to Redis:', err);
-});
-
-module.exports = { createRedisClient, redisClient };
+// Create and export a single Redis client instance
+module.exports = createRedisClient();

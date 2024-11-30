@@ -2,11 +2,14 @@ const puppeteer = require('puppeteer-core');
 const fs = require('fs').promises;
 const path = require('path');
 const os = require('os');
-const redisClient = require('./utils/redisClient');
+const RedisService = require('./services/redisService');
 require('dotenv').config();
 
 // Get machine ID from env or hostname
 const MACHINE_ID = process.env.MACHINE_ID || os.hostname().split('.')[0];
+
+// Initialize Redis Service
+const redisService = new RedisService(MACHINE_ID);
 
 // Get the default Chrome path based on the operating system
 function getDefaultChromePath() {
@@ -27,7 +30,8 @@ const CONFIG = {
   TIMEOUT: 120000,
   LOAD_MORE_DELAY: 3000,
   DEBUG: true,
-  MAX_RETRIES: 3
+  MAX_RETRIES: 3,
+  CONCURRENT_BATCHES: parseInt(process.env.CONCURRENT_BATCHES, 10) || 2
 };
 
 const debug = (...args) => {
@@ -297,14 +301,22 @@ async function processApp(page, url, categoryName, retryCount = 0) {
   const outputPath = path.join(CONFIG.APPS_DIR, `${appName}.json`);
 
   try {
-    // Check if file already exists
-    try {
-      await fs.access(outputPath);
-      debug(`Skipping ${appName} - already processed`);
-      return false;
-    } catch {
-      // File doesn't exist, continue processing
+    // Check Redis status first before processing
+    const { isProcessing, isCompleted } = await redisService.checkAppStatus(appName);
+    
+    if (isCompleted) {
+      debug(`Skipping ${appName} - already processed in Redis`);
+      return { processed: false, skipped: true };
     }
+
+    if (isProcessing) {
+      debug(`Skipping ${appName} - being processed by another machine`);
+      return { processed: false, skipped: true };
+    }
+
+    // Mark as processing in Redis before starting
+    await redisService.markAppProcessing(appName);
+    machineStatus.current_app = appName;
 
     const appData = await scrapeApp(page, url, categoryName);
     if (!appData && retryCount < CONFIG.MAX_RETRIES) {
@@ -314,15 +326,25 @@ async function processApp(page, url, categoryName, retryCount = 0) {
     }
 
     if (appData) {
-      await fs.writeFile(outputPath, JSON.stringify(appData, null, 2));
+      // Save data both locally and to Redis
+      await Promise.all([
+        fs.writeFile(outputPath, JSON.stringify(appData, null, 2)),
+        redisService.markAppCompleted(appName, appData)
+      ]);
+      
+      machineStatus.processed_count++;
       debug(`Saved data for ${appName}`);
-      return true;
+      return { processed: true, skipped: false };
     }
 
-    return false;
+    machineStatus.failed_count++;
+    return { processed: false, skipped: false };
   } catch (error) {
+    machineStatus.failed_count++;
     debug(`Error processing ${appName}:`, error.message);
-    return false;
+    return { processed: false, skipped: false };
+  } finally {
+    machineStatus.current_app = null;
   }
 }
 
@@ -384,7 +406,7 @@ const machineStatus = {
 // Update machine status periodically
 setInterval(async () => {
   try {
-    await redisClient.updateMachineStatus(MACHINE_ID, machineStatus);
+    await redisService.updateMachineStatus(machineStatus);
   } catch (error) {
     debug('Failed to update machine status:', error);
   }
@@ -394,7 +416,7 @@ setInterval(async () => {
 process.on('SIGINT', async () => {
   debug('Shutting down...');
   try {
-    await redisClient.updateMachineStatus(MACHINE_ID, {
+    await redisService.updateMachineStatus({
       ...machineStatus,
       status: 'stopped'
     });
@@ -405,58 +427,94 @@ process.on('SIGINT', async () => {
 });
 
 async function main() {
-  debug('Starting app scraping process');
+  debug(`Starting app scraping process on machine ${MACHINE_ID}`);
   const BATCH_SIZE = 50;
-  const CONCURRENT_BATCHES = 3;
+  const CONCURRENT_BATCHES = CONFIG.CONCURRENT_BATCHES;
 
   try {
     // Create apps directory if it doesn't exist
-    try {
-      await fs.access(CONFIG.APPS_DIR);
-    } catch {
-      await fs.mkdir(CONFIG.APPS_DIR);
-      debug('Created apps directory');
-    }
+    await fs.mkdir(CONFIG.APPS_DIR, { recursive: true });
 
-    // Read all category JSON files
-    const files = await fs.readdir(CONFIG.CATEGORY_DIR);
-    const jsonFiles = files.filter(f => f.endsWith('.json'));
-    debug(`Found ${jsonFiles.length} category files`);
-
-    let totalProcessed = 0;
-    let totalSkipped = 0;
-
-    for (const file of jsonFiles) {
-      const filePath = path.join(CONFIG.CATEGORY_DIR, file);
-      const content = JSON.parse(await fs.readFile(filePath, 'utf8'));
-      debug(`Processing category: ${content.category} (${content.urls.length} apps)`);
-
-      // Split URLs into batches
-      const batches = [];
-      for (let i = 0; i < content.urls.length; i += BATCH_SIZE) {
-        batches.push(content.urls.slice(i, i + BATCH_SIZE));
-      }
+    while (true) { // Continuous processing loop
+      // Get available category files
+      const files = await fs.readdir(CONFIG.CATEGORY_DIR);
+      const jsonFiles = files.filter(f => f.endsWith('.json'));
       
-      // Process batches in parallel
-      for (let i = 0; i < batches.length; i += CONCURRENT_BATCHES) {
-        const currentBatches = batches.slice(i, i + CONCURRENT_BATCHES);
-        const results = await Promise.all(
-          currentBatches.map((batch, index) => 
-            processBatch(batch, content.category, `${content.category}-${i + index}`)
-          )
-        );
-        
-        // Aggregate results
-        results.forEach(result => {
-          totalProcessed += result.processed;
-          totalSkipped += result.skipped;
-        });
-
-        debug(`Progress: ${totalProcessed} processed, ${totalSkipped} skipped`);
+      if (!jsonFiles.length) {
+        debug('No more categories to process');
+        break;
       }
+
+      // Random category selection for better distribution
+      const randomIndex = Math.floor(Math.random() * jsonFiles.length);
+      const selectedFile = jsonFiles[randomIndex];
+      const filePath = path.join(CONFIG.CATEGORY_DIR, selectedFile);
+      
+      try {
+        const content = JSON.parse(await fs.readFile(filePath, 'utf8'));
+        machineStatus.current_category = content.category;
+        debug(`Processing category: ${content.category} (${content.urls.length} apps)`);
+
+        // Split URLs into batches
+        const batches = [];
+        for (let i = 0; i < content.urls.length; i += BATCH_SIZE) {
+          batches.push(content.urls.slice(i, i + BATCH_SIZE));
+        }
+        
+        let totalProcessed = 0;
+        let totalSkipped = 0;
+
+        // Process batches sequentially but with parallel app processing
+        for (let i = 0; i < batches.length; i += CONCURRENT_BATCHES) {
+          const browser = await puppeteer.launch({
+            headless: 'new',
+            executablePath: CONFIG.CHROME_PATH,
+            args: [
+              '--no-sandbox',
+              '--disable-setuid-sandbox',
+              '--disable-dev-shm-usage',
+              '--disable-accelerated-2d-canvas',
+              '--disable-gpu',
+              '--window-size=1920x1080'
+            ],
+            defaultViewport: { width: 1920, height: 1080 }
+          });
+
+          try {
+            const page = await browser.newPage();
+            await setupPage(page);
+
+            const currentBatches = batches.slice(i, i + CONCURRENT_BATCHES);
+            for (const batch of currentBatches) {
+              for (const url of batch) {
+                const { processed, skipped } = await processApp(page, url, content.category);
+                if (processed) totalProcessed++;
+                if (skipped) totalSkipped++;
+                await delay(1000);
+              }
+            }
+          } finally {
+            await browser.close();
+          }
+
+          debug(`Progress for ${content.category}: ${totalProcessed} processed, ${totalSkipped} skipped`);
+        }
+
+        // Mark category as processed
+        const processedPath = filePath.replace('.json', '.processed');
+        await fs.rename(filePath, processedPath);
+        machineStatus.current_category = null;
+
+      } catch (error) {
+        debug(`Error processing category ${selectedFile}:`, error);
+        // Mark category as failed
+        const failedPath = filePath.replace('.json', '.failed');
+        await fs.rename(filePath, failedPath);
+      }
+
+      await delay(1000); // Prevent too rapid category switching
     }
 
-    debug(`Scraping completed: ${totalProcessed} processed, ${totalSkipped} skipped`);
   } catch (error) {
     debug('Fatal error:', error);
     process.exit(1);
