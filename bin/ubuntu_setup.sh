@@ -14,6 +14,32 @@ get_ubuntu_version() {
 UBUNTU_VERSION=$(get_ubuntu_version)
 echo "Detected Ubuntu version: $UBUNTU_VERSION"
 
+# Check if Node.js is installed
+if ! command -v node &> /dev/null || ! command -v npm &> /dev/null; then
+    echo "Node.js or npm not found. Installing Node.js..."
+    # Clean up any existing Node.js installations
+    sudo rm -f /etc/apt/sources.list.d/nodesource.list
+    sudo rm -f /etc/apt/sources.list.d/nodesource.list.save
+    
+    # Install prerequisites
+    sudo apt update
+    sudo apt install -y ca-certificates curl gnupg
+    
+    # Add NodeSource repository
+    curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+    
+    # Install Node.js
+    sudo apt install -y nodejs
+    
+    # Verify installation
+    echo "Node.js version: $(node --version)"
+    echo "npm version: $(npm --version)"
+else
+    echo "Node.js is already installed"
+    echo "Node.js version: $(node --version)"
+    echo "npm version: $(npm --version)"
+fi
+
 # Function to determine package names based on Ubuntu version
 get_package_list() {
     if [[ "$UBUNTU_VERSION" == "24.04" ]] || [[ "$UBUNTU_VERSION" == "noble" ]]; then
