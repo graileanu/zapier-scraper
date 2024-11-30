@@ -5,3 +5,6 @@ apps/*
 
 node_modules/
 lock/*
+
+category_results/*.processed
+
