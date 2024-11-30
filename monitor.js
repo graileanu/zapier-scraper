@@ -95,7 +95,7 @@ async function displayStats() {
   
   try {
     const stats = await getMachineStats();
-    if (!stats) {
+    if (!stats || !stats.machines) {
       console.log(colors.yellow('Waiting for data...'));
       return;
     }
@@ -119,6 +119,11 @@ async function displayStats() {
 
     const now = Date.now();
     stats.machines.forEach(({ key, data }) => {
+      // Skip if data is null or missing required fields
+      if (!data || !data.last_active || !data.started_at) {
+        return;
+      }
+
       const machineId = key.replace('machine:status:', '');
       const lastActiveAgo = now - data.last_active;
       const isActive = lastActiveAgo < MACHINE_INACTIVE_THRESHOLD;
@@ -130,8 +135,8 @@ async function displayStats() {
         status,
         data.current_app || '-',
         data.current_category || '-',
-        data.processed_count,
-        data.failed_count,
+        data.processed_count || 0,
+        data.failed_count || 0,
         formatDuration(lastActiveAgo) + ' ago',
         uptime
       ]);
@@ -147,9 +152,12 @@ async function displayStats() {
       const processingApps = await redis.keys('app:processing:*');
       for (const key of processingApps) {
         const data = JSON.parse(await redis.get(key));
+        // Add null check for processing app data
+        if (!data || !data.started_at) continue;
+        
         const appName = key.replace('app:processing:', '');
         const duration = formatDuration(now - data.started_at);
-        console.log(colors.gray(`- ${appName} (by ${data.machine_id}, running for ${duration})`));
+        console.log(colors.gray(`- ${appName} (by ${data.machine_id || 'unknown'}, running for ${duration})`));
       }
     }
   } catch (error) {
