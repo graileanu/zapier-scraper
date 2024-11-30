@@ -1,0 +1,19 @@
+{
+  "category": "Taxes",
+  "url": "https://zapier.com/apps/categories/tax",
+  "scrapedAt": "2024-11-30T13:19:26.183Z",
+  "totalUrls": 11,
+  "urls": [
+    "https://zapier.com/apps/netsuite/integrations",
+    "https://zapier.com/apps/salesforce/integrations",
+    "https://zapier.com/apps/hubspot/integrations",
+    "https://zapier.com/apps/slack/integrations",
+    "https://zapier.com/apps/openai/integrations",
+    "https://zapier.com/apps/microsoft-dynamics-crm/integrations",
+    "https://zapier.com/apps/microsoft-teams/integrations",
+    "https://zapier.com/apps/zendesk/integrations",
+    "https://zapier.com/apps/jira-software-cloud/integrations",
+    "https://zapier.com/apps/interfaces/integrations",
+    "https://zapier.com/apps/taxplaniq/integrations"
+  ]
+}

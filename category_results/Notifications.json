@@ -1,0 +1,19 @@
+{
+  "category": "Notifications",
+  "url": "https://zapier.com/apps/categories/notifications",
+  "scrapedAt": "2024-11-30T14:45:43.638Z",
+  "totalUrls": 11,
+  "urls": [
+    "https://zapier.com/apps/netsuite/integrations",
+    "https://zapier.com/apps/salesforce/integrations",
+    "https://zapier.com/apps/hubspot/integrations",
+    "https://zapier.com/apps/slack/integrations",
+    "https://zapier.com/apps/openai/integrations",
+    "https://zapier.com/apps/microsoft-dynamics-crm/integrations",
+    "https://zapier.com/apps/microsoft-teams/integrations",
+    "https://zapier.com/apps/zendesk/integrations",
+    "https://zapier.com/apps/jira-software-cloud/integrations",
+    "https://zapier.com/apps/amazon-sns/integrations",
+    "https://zapier.com/apps/interfaces/integrations"
+  ]
+}
