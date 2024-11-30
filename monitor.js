@@ -1,16 +1,6 @@
 const Redis = require('ioredis');
 const Table = require('cli-table3');
 const colors = require('colors/safe');
-const fs = require('fs');
-
-// Check if .env exists
-if (!fs.existsSync('.env')) {
-  console.error(colors.red('Error: .env file not found!'));
-  console.log('\nPlease create a .env file with the required configuration:');
-  console.log(colors.cyan('REDIS_URL=your_redis_url'));
-  console.log(colors.cyan('CONCURRENT_BATCHES=1'));
-  process.exit(1);
-}
 
 require('dotenv').config();
 
@@ -71,10 +61,23 @@ function formatDuration(ms) {
   return `${seconds}s`;
 }
 
+async function scanKeys(pattern) {
+  let cursor = '0';
+  const keys = [];
+  
+  do {
+    const [nextCursor, matchedKeys] = await redis.scan(cursor, 'MATCH', pattern, 'COUNT', '100');
+    cursor = nextCursor;
+    keys.push(...matchedKeys);
+  } while (cursor !== '0');
+  
+  return keys;
+}
+
 async function getMachineStats() {
   try {
-    // Get all machine statuses
-    const machineKeys = await redis.keys('machine:status:*');
+    // Get all machine statuses using SCAN
+    const machineKeys = await scanKeys('machine:status:*');
     const machines = await Promise.all(
       machineKeys.map(async (key) => {
         const data = await redis.get(key);
@@ -82,10 +85,10 @@ async function getMachineStats() {
       })
     );
 
-    // Get processing and completed counts
+    // Get processing and completed counts using SCAN
     const [processingKeys, completedKeys] = await Promise.all([
-      redis.keys('app:processing:*'),
-      redis.keys('app:data:*')
+      scanKeys('app:processing:*'),
+      scanKeys('app:data:*')
     ]);
 
     return {

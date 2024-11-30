@@ -3,7 +3,9 @@ const fs = require('fs').promises;
 const path = require('path');
 const os = require('os');
 const RedisService = require('./services/redisService');
+const colors = require('colors');
 require('dotenv').config();
+
 
 // Get machine ID from env or hostname
 const MACHINE_ID = process.env.MACHINE_ID || os.hostname().split('.')[0];
@@ -426,7 +428,21 @@ process.on('SIGINT', async () => {
   process.exit();
 });
 
+async function checkEnvFile() {
+  try {
+    await fs.access('.env');
+  } catch {
+    console.error(colors.red('Error: .env file not found!'));
+    console.log('\nPlease create a .env file with the required configuration:');
+    console.log(colors.cyan('REDIS_URL=your_redis_url'));
+    console.log(colors.cyan('CONCURRENT_BATCHES=1'));
+    process.exit(1);
+  }
+}
+
+
 async function main() {
+  await checkEnvFile();
   debug(`Starting app scraping process on machine ${MACHINE_ID}`);
   const BATCH_SIZE = 50;
   const CONCURRENT_BATCHES = CONFIG.CONCURRENT_BATCHES;
