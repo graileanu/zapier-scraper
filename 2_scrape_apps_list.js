@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const os = require('os');
+const colors = require('colors');
 
 // Get the default Chrome path based on the operating system
 function getDefaultChromePath() {
@@ -40,7 +41,7 @@ const CONFIG = {
   SCROLL_INTERVAL: 500,  // Reduced interval
   
   // Interval (in milliseconds) to check if page has finished loading
-  PAGE_LOAD_CHECK_INTERVAL: 300,  // Reduced interval
+  PAGE_LOAD_CHECK_INTERVAL: 500,  // Reduced interval
   
   // Maximum number of attempts to load more content
   MAX_ATTEMPTS: 100,
@@ -462,6 +463,8 @@ async function processCategory(browser, category) {
     return;
   }
 
+  debug(`Processing category: ${category.name.green}`);
+
   try {
     const apps = await scrapeCategory(page, category);
     
@@ -474,10 +477,10 @@ async function processCategory(browser, category) {
         urls: apps
       }, null, 2));
       
-      debug(`Saved ${apps.length} apps for ${category.name}`);
+      debug(`✓ Completed ${category.name.green} with ${String(apps.length).yellow} apps`);
     }
   } catch (error) {
-    console.error(`Error scraping ${category.name}:`, error);
+    console.error(`Error scraping ${category.name.red}:`, error);
   } finally {
     await page.close();
   }
