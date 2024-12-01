@@ -11,7 +11,8 @@ const LinkSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-}, { _id: true });
+  // When creating documents with links, MongoDB won't generate ObjectIds for array elements. The array indices (0, 1, 2, etc.) will serve as natural identifiers.
+}, { _id: false, id: false });
 
 const InteractionSchema = new mongoose.Schema({
   name: String,
