@@ -2,6 +2,18 @@ const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const os = require('os');
 
+// Get the default Chrome path based on the operating system
+function getDefaultChromePath() {
+  switch (os.platform()) {
+    case 'darwin': // macOS
+      return '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+    case 'linux':
+      return '/usr/bin/google-chrome';
+    default:
+      return process.env.CHROME_PATH || '/usr/bin/google-chrome';
+  }
+}
+
 const CONFIG = {
   // Maximum time (in milliseconds) to wait for page operations before timing out
   TIMEOUT: 120000,  // 2 minutes
