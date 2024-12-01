@@ -1,0 +1,24 @@
+{
+  "category": "News & Lifestyle",
+  "url": "https://zapier.com/apps/categories/news",
+  "scrapedAt": "2024-11-30T23:12:01.819Z",
+  "totalUrls": 16,
+  "urls": [
+    "https://zapier.com/apps/netsuite/integrations",
+    "https://zapier.com/apps/salesforce/integrations",
+    "https://zapier.com/apps/hubspot/integrations",
+    "https://zapier.com/apps/slack/integrations",
+    "https://zapier.com/apps/openai/integrations",
+    "https://zapier.com/apps/microsoft-dynamics-crm/integrations",
+    "https://zapier.com/apps/microsoft-teams/integrations",
+    "https://zapier.com/apps/zendesk/integrations",
+    "https://zapier.com/apps/jira-software-cloud/integrations",
+    "https://zapier.com/apps/rss/integrations",
+    "https://zapier.com/apps/weather/integrations",
+    "https://zapier.com/apps/interfaces/integrations",
+    "https://zapier.com/apps/newslit/integrations",
+    "https://zapier.com/apps/new-york-times/integrations",
+    "https://zapier.com/apps/newsblur/integrations",
+    "https://zapier.com/apps/consumeraffairs/integrations"
+  ]
+}
