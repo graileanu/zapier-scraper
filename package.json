@@ -13,6 +13,8 @@
     "colors": "^1.4.0",
     "dotenv": "^16.4.5",
     "ioredis": "^5.4.1",
+    "mongoose": "^8.8.3",
+    "openai": "^4.73.1",
     "puppeteer-core": "^23.9.0"
   }
 }
