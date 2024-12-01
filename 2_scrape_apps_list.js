@@ -43,7 +43,7 @@ const CONFIG = {
   PAGE_LOAD_CHECK_INTERVAL: 300,  // Reduced interval
   
   // Maximum number of attempts to load more content
-  MAX_ATTEMPTS: 50,
+  MAX_ATTEMPTS: 100,
   
   // Maximum consecutive attempts with no new content before stopping
   NO_NEW_CONTENT_MAX_ATTEMPTS: 3,  // Reduced attempts
@@ -52,7 +52,7 @@ const CONFIG = {
   MIN_NEW_ITEMS_PER_LOAD: 10,  // Reduced minimum
   
   // Number of categories to process in parallel
-  CONCURRENT_CATEGORIES: 3,
+  CONCURRENT_CATEGORIES: 1,
   
   // Browser instance settings
   BROWSER_OPTIONS: {
@@ -483,6 +483,21 @@ async function processCategory(browser, category) {
   }
 }
 
+// Add this function after the debug function
+async function getRandomUnprocessedCategory(categories) {
+  const unprocessedCategories = categories.filter(category => {
+    const filename = `${CONFIG.OUTPUT_DIR}/${category.name.replace(/[^a-z0-9]/gi, '_')}.json`;
+    return !fs.existsSync(filename);
+  });
+
+  if (unprocessedCategories.length === 0) {
+    return null;
+  }
+
+  const randomIndex = Math.floor(Math.random() * unprocessedCategories.length);
+  return unprocessedCategories[randomIndex];
+}
+
 /**
  * Main execution function that orchestrates the scraping process for Zapier app categories.
  * 
@@ -530,16 +545,17 @@ async function main() {
   });
 
   try {
-    // Process categories in chunks of CONCURRENT_CATEGORIES
-    for (let i = 0; i < categories.length; i += CONFIG.CONCURRENT_CATEGORIES) {
-      const categoryBatch = categories.slice(i, i + CONFIG.CONCURRENT_CATEGORIES);
-      debug(`Processing batch of ${categoryBatch.length} categories`);
+    while (true) {
+      const category = await getRandomUnprocessedCategory(categories);
       
-      await Promise.all(
-        categoryBatch.map(category => processCategory(browser, category))
-      );
-      
-      debug(`Completed batch ${Math.floor(i / CONFIG.CONCURRENT_CATEGORIES) + 1}`);
+      if (!category) {
+        debug('No more categories to process');
+        break;
+      }
+
+      debug(`Processing category: ${category.name}`);
+      await processCategory(browser, category);
+      await delay(CONFIG.DELAY); // Add delay between categories
     }
   } finally {
     await browser.close();
