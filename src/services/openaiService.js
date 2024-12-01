@@ -40,13 +40,15 @@ class OpenAIService {
            }
 
         5. Interactions Array:
-        - Combine all 'triggers' and 'actions' into a single 'interactions' array
-        - Each interaction must have three required fields: name, description, and type
+        - Process exisintg 'actions' data into a single 'interactions' array
+        - Although each item is in the 'actions' array, the item can be either a trigger or an action
+        - Each interaction MUST include THREE fields: name, description, and type (this is mandatory)
         - Type Detection Rules:
+                * EVERY interaction must be classified as either "trigger" or "action" (lowercase)
                 * Set type as "trigger" if:
                 - The interaction represents an event that happens in this app that can be monitored and sent to other apps
                 - The interaction is about data or state changes within this app that other apps might want to react to
-                - Examples for Shopify:
+                a) Examples for Shopify:
                     > "New Order" is a trigger because it's an event in Shopify that other apps might want to know about
                     > "Customer Account Enabled" is a trigger because it's a state change in Shopify that other apps might need to react to
                 * Set type as "action" if:
@@ -55,6 +57,31 @@ class OpenAIService {
                 - Examples for Shopify:
                     > "Create Order" is an action because it's something other apps might want Shopify to do
                     > "Update Product" is an action because it's a modification other apps can request Shopify to perform
+                b) Example for Retently:
+                Triggers (events that happen in Retently):
+                - "New Survey Response" (trigger: it's an event in Retently)
+                - "Company Score Updated" (trigger: it's a state change in Retently)
+                - "Customer Unsubscribed" (trigger: it's an event in Retently)
+                Actions (things other apps can make Retently do):
+                - "Send an Email Survey" (action: other apps can request this)
+                - "Create or Update Customer" (action: it's a modification requested by other apps)
+                - "Apply Tag to Response" (action: it's a modification)
+
+                * Type Classification Guidelines:
+                SET AS "trigger" IF:
+                - Represents an event notification from this app
+                - Indicates a state change or update that happened
+                - Uses words like "when", "triggers when", "is updated"
+                - Examples: "New...", "Updated...", "...Changed", "...Received"
+
+                SET AS "action" IF:
+                - Creates, modifies, or updates data in this app
+                - Performs a search or lookup
+                - Represents a command or request to do something
+                - Examples: "Create...", "Update...", "Find...", "Send...", "Apply..."
+                
+                
+
         - Description Detection and Cleanup:
             * If description is null or incomplete, analyze the name field:
             - Look for patterns where description is embedded in name:
@@ -62,26 +89,38 @@ class OpenAIService {
                 > Split when the same verb appears twice (e.g., "Create OrderCreates")
                 > Split at obvious sentence boundaries (periods, common verbs)
             Examples:
-                > From: "Create Draft OrderCreates a new draft order." 
-                To: name: "Create Draft Order", description: "Creates a new draft order."
-                > From: "Find ProductFinds a product by title"
-                To: name: "Find Product", description: "Finds a product by title"
+                1) From: 
+                       "Create Draft OrderCreates a new draft order." 
+                   To: 
+                        name: "Create Draft Order", 
+                        description: "Creates a new draft order.",
+                        type: "action"  
+                2) From: 
+                       "Find ProductFinds a product by title"
+                To: 
+                        name: "Find Product", 
+                        description: "Finds a product by title",
+                        type: "trigger"
             * For descriptions that don't form complete sentences:
-            - Identify the key action or event
-            - Restructure into a clear, complete sentence
-            - Add necessary context about what the interaction does
+                - Identify the key action or event
+                - Restructure into a clear, complete sentence
+                - Add necessary context about what the interaction does
             * Ensure consistency in tense and structure:
-            - Triggers should be described in present tense ("Triggers when...", "Occurs when...")
+                - Triggers should be described in present tense ("Triggers when...", "Occurs when...")
             - Actions should describe what they do ("Creates...", "Updates...")
             * Shorten names when possible, example:
                         From: "name" : "Assign Candidate to Job Opening/Talent Pool",
                         To: "name" : "Assign Candidate to Job Opening",
         
-        - Quality Requirements:
-            * Every interaction must have all three fields populated
-            * No null values allowed
-            * Descriptions must be complete sentences
-            * Names should be clear
+            - Quality Requirements:
+                * STRICT ENFORCEMENT: Every interaction MUST have all three fields:
+                {
+                    "name": "string",
+                    "description": "string",
+                    "type": "trigger" or "action" (lowercase only)
+                }
+                * NO EXCEPTIONS: Interactions without all three fields should be flagged as errors
+                * Type field is MANDATORY and must be explicitly set
 
       6. Category:
          - Map 'sourceCategory' to 'category'
