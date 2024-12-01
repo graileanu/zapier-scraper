@@ -497,7 +497,7 @@ async function main() {
       const jsonFiles = files.filter(f => f.endsWith('.json'));
       
       if (!jsonFiles.length) {
-        debug('No more categories to process');
+        debug(`${colors.yellow('No more categories to process')}`);
         break;
       }
 
@@ -509,7 +509,7 @@ async function main() {
       try {
         const content = JSON.parse(await fs.readFile(filePath, 'utf8'));
         machineStatus.current_category = content.category;
-        debug(`Processing category: ${content.category} (${content.urls.length} apps)`);
+        debug(`${colors.blue('Processing category:')} ${content.category} (${content.urls.length} apps)`);
 
         // Split URLs into batches
         const batches = [];
