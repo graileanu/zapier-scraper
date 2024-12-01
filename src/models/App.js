@@ -33,7 +33,7 @@ const AppSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    maxLength: 255
+    maxLength: 512
   },
   logo_url: String,
   links: [LinkSchema],
