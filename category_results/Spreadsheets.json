@@ -1,0 +1,33 @@
+{
+  "category": "Spreadsheets",
+  "url": "https://zapier.com/apps/categories/spreadsheets",
+  "scrapedAt": "2024-12-01T16:20:41.176Z",
+  "totalUrls": 25,
+  "urls": [
+    "https://zapier.com/apps/netsuite/integrations",
+    "https://zapier.com/apps/salesforce/integrations",
+    "https://zapier.com/apps/hubspot/integrations",
+    "https://zapier.com/apps/slack/integrations",
+    "https://zapier.com/apps/openai/integrations",
+    "https://zapier.com/apps/microsoft-dynamics-crm/integrations",
+    "https://zapier.com/apps/microsoft-teams/integrations",
+    "https://zapier.com/apps/zendesk/integrations",
+    "https://zapier.com/apps/jira-software-cloud/integrations",
+    "https://zapier.com/apps/google-sheets/integrations",
+    "https://zapier.com/apps/zapier-tables/integrations",
+    "https://zapier.com/apps/excel/integrations",
+    "https://zapier.com/apps/interfaces/integrations",
+    "https://zapier.com/apps/smartsheet/integrations",
+    "https://zapier.com/apps/clay/integrations",
+    "https://zapier.com/apps/zoho-sheet/integrations",
+    "https://zapier.com/apps/easycsv/integrations",
+    "https://zapier.com/apps/grist/integrations",
+    "https://zapier.com/apps/calculator-studio/integrations",
+    "https://zapier.com/apps/rows/integrations",
+    "https://zapier.com/apps/data-blaze/integrations",
+    "https://zapier.com/apps/rowshare/integrations",
+    "https://zapier.com/apps/gigasheet/integrations",
+    "https://zapier.com/apps/dromo/integrations",
+    "https://zapier.com/apps/cloudculate/integrations"
+  ]
+}
