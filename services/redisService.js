@@ -35,9 +35,10 @@ class RedisService {
 
   async checkAppStatus(appName) {
     try {
+      const normalizedAppName = appName.toLowerCase();
       const [processing, completed] = await Promise.all([
-        this.client.get(`app:processing:${appName}`),
-        this.client.exists(`app:data:${appName}`)
+        this.client.get(`app:processing:${normalizedAppName}`),
+        this.client.exists(`app:data:${normalizedAppName}`)
       ]);
       
       return {
@@ -52,7 +53,8 @@ class RedisService {
 
   async markAppProcessing(appName) {
     try {
-      const processingKey = `app:processing:${appName}`;
+      const normalizedAppName = appName.toLowerCase();
+      const processingKey = `app:processing:${normalizedAppName}`;
       await this.client.set(processingKey, JSON.stringify({
         machine_id: this.machineId,
         started_at: Date.now()
@@ -65,15 +67,16 @@ class RedisService {
 
   async markAppCompleted(appName, data) {
     try {
+      const normalizedAppName = appName.toLowerCase();
       const multi = this.client.multi();
       
-      multi.set(`app:data:${appName}`, JSON.stringify({
+      multi.set(`app:data:${normalizedAppName}`, JSON.stringify({
         ...data,
         processed_by: this.machineId,
         processed_at: Date.now()
       }));
       
-      multi.del(`app:processing:${appName}`);
+      multi.del(`app:processing:${normalizedAppName}`);
       
       await multi.exec();
     } catch (error) {

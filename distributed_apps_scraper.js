@@ -301,7 +301,8 @@ async function scrapeApp(page, url, categoryName) {
 
 async function checkLocalCache(appName) {
   try {
-    await fs.access(path.join(CONFIG.LOCK_DIR, `${appName}.lock`));
+    const normalizedAppName = appName.toLowerCase();
+    await fs.access(path.join(CONFIG.LOCK_DIR, `${normalizedAppName}.lock`));
     return true; // File exists, app is cached as processed
   } catch {
     return false; // File doesn't exist
@@ -310,9 +311,10 @@ async function checkLocalCache(appName) {
 
 async function markLocalCache(appName) {
   try {
+    const normalizedAppName = appName.toLowerCase();
     await fs.mkdir(CONFIG.LOCK_DIR, { recursive: true });
     await fs.writeFile(
-      path.join(CONFIG.LOCK_DIR, `${appName}.lock`),
+      path.join(CONFIG.LOCK_DIR, `${normalizedAppName}.lock`),
       JSON.stringify({
         processed_at: new Date().toISOString(),
         machine_id: MACHINE_ID
