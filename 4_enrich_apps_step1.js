@@ -17,37 +17,76 @@ const redisService = new RedisService(MACHINE_ID);
 
 async function processApp(appName) {
   try {
+    const normalizedAppName = appName.toLowerCase();
+
     // Check if app already exists in MongoDB
-    const existingApp = await App.findOne({ slug: appName.toLowerCase() });
+    const existingApp = await App.findOne({ slug: normalizedAppName });
     if (existingApp) {
-      console.log(`App ${appName} already exists, skipping...`);
+      console.log(`${appName} already exists in MongoDB, skipping...`.cyan);
       return;
     }
 
-    // Fetch data from Redis
-    const redisKey = `app:data:${appName}`;
-    const appData = await redisService.client.get(redisKey);
-    if (!appData) {
-      console.log(`No Redis data found for ${appName}`);
+    // Check Redis status - using new key format for completion check
+    const [processing, completed] = await Promise.all([
+      redisService.client.get(`app:processing:${normalizedAppName}`),
+      redisService.client.exists(`app:mongo:${normalizedAppName}`)
+    ]);
+
+    if (processing) {
+      console.log(`${appName} is being processed by another machine, skipping...`.yellow);
       return;
     }
 
-    // Normalize data using OpenAI
-    const normalizedData = await openAIService.normalizeAppData(JSON.parse(appData));
+    if (completed) {
+      console.log(`${appName} already processed to MongoDB, skipping...`.cyan);
+      return;
+    }
 
-    // Create new MongoDB document
-    const app = new App({
-      ...normalizedData,
-      slug: appName.toLowerCase(),
-      updatedAt: new Date()
-    });
+    // Mark as processing before starting
+    await redisService.markAppProcessing(normalizedAppName);
+    console.log(`Started processing ${appName}`.green);
 
-    // Save to MongoDB
-    await app.save();
-    console.log(`Successfully processed and saved ${appName.green}`);
+    try {
+      // Fetch data from Redis
+      const redisKey = `app:data:${normalizedAppName}`;
+      const appData = await redisService.client.get(redisKey);
+      if (!appData) {
+        console.log(`No Redis data found for ${appName}`.red);
+        return;
+      }
+
+      // Normalize data using OpenAI
+      const normalizedData = await openAIService.normalizeAppData(JSON.parse(appData));
+
+      // Create new MongoDB document
+      const app = new App({
+        ...normalizedData,
+        slug: normalizedAppName,
+        updatedAt: new Date()
+      });
+
+      // Save to MongoDB
+      await app.save();
+      
+      // Mark as completed in Redis with new key format
+      const multi = redisService.client.multi();
+      multi.set(`app:mongo:${normalizedAppName}`, JSON.stringify({
+        processed_by: redisService.machineId,
+        processed_at: Date.now()
+      }));
+      multi.del(`app:processing:${normalizedAppName}`);
+      await multi.exec();
+
+      console.log(`Successfully processed and saved ${appName}`.green);
+
+    } catch (error) {
+      console.error(`Error processing ${appName}`.red, error);
+      // Remove processing flag on error
+      await redisService.client.del(`app:processing:${normalizedAppName}`);
+    }
 
   } catch (error) {
-    console.error(`Error processing ${appName.red}:`, error);
+    console.error(`Error in processApp for ${appName}`.red, error);
   }
 }
 
