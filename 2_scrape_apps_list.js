@@ -16,13 +16,13 @@ function getDefaultChromePath() {
 
 const CONFIG = {
   // Maximum time (in milliseconds) to wait for page operations before timing out
-  TIMEOUT: 120000,  // 2 minutes
+  TIMEOUT: 60000,  // Reduced to 1 minute
   
   // Base delay (in milliseconds) between scraping operations
-  DELAY: 2000,
+  DELAY: 1000,  // Reduced delay
   
   // Delay (in milliseconds) after clicking "Load More" button
-  LOAD_MORE_DELAY: 3000,
+  LOAD_MORE_DELAY: 1500,  // Reduced delay
   
   // Path to Chrome executable for Puppeteer
   CHROME_PATH: process.env.CHROME_PATH || getDefaultChromePath(),
@@ -34,22 +34,38 @@ const CONFIG = {
   DEBUG: true,
   
   // Maximum time (in milliseconds) to wait for specific elements or conditions
-  MAX_WAIT_TIME: 30000,
+  MAX_WAIT_TIME: 15000,  // Reduced timeout
   
   // Interval (in milliseconds) between scroll attempts
-  SCROLL_INTERVAL: 1000,
+  SCROLL_INTERVAL: 500,  // Reduced interval
   
   // Interval (in milliseconds) to check if page has finished loading
-  PAGE_LOAD_CHECK_INTERVAL: 500,
+  PAGE_LOAD_CHECK_INTERVAL: 300,  // Reduced interval
   
   // Maximum number of attempts to load more content
   MAX_ATTEMPTS: 50,
   
   // Maximum consecutive attempts with no new content before stopping
-  NO_NEW_CONTENT_MAX_ATTEMPTS: 5,
+  NO_NEW_CONTENT_MAX_ATTEMPTS: 3,  // Reduced attempts
   
   // Minimum number of new items expected per load operation
-  MIN_NEW_ITEMS_PER_LOAD: 15
+  MIN_NEW_ITEMS_PER_LOAD: 10,  // Reduced minimum
+  
+  // Number of categories to process in parallel
+  CONCURRENT_CATEGORIES: 3,
+  
+  // Browser instance settings
+  BROWSER_OPTIONS: {
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--disable-gpu',
+      '--window-size=1920x1080'
+    ],
+    defaultViewport: { width: 1920, height: 1080 }
+  }
 };
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -435,6 +451,38 @@ async function scrapeCategory(page, category) {
   }
 }
 
+async function processCategory(browser, category) {
+  const page = await browser.newPage();
+  await setupPage(page);
+  
+  const filename = `${CONFIG.OUTPUT_DIR}/${category.name.replace(/[^a-z0-9]/gi, '_')}.json`;
+  if (fs.existsSync(filename)) {
+    debug(`Skipping ${category.name} - already processed`);
+    await page.close();
+    return;
+  }
+
+  try {
+    const apps = await scrapeCategory(page, category);
+    
+    if (apps.length > 0) {
+      fs.writeFileSync(filename, JSON.stringify({
+        category: category.name,
+        url: category.url,
+        scrapedAt: new Date().toISOString(),
+        totalUrls: apps.length,
+        urls: apps
+      }, null, 2));
+      
+      debug(`Saved ${apps.length} apps for ${category.name}`);
+    }
+  } catch (error) {
+    console.error(`Error scraping ${category.name}:`, error);
+  } finally {
+    await page.close();
+  }
+}
+
 /**
  * Main execution function that orchestrates the scraping process for Zapier app categories.
  * 
@@ -476,40 +524,27 @@ async function main() {
   const categories = JSON.parse(fs.readFileSync('categories.json'));
   debug(`Loaded ${categories.length} categories`);
 
-  const browser = await puppeteer.launch(getLaunchOptions());
-  
-  const page = await browser.newPage();
-  await setupPage(page);
+  const browser = await puppeteer.launch({
+    ...getLaunchOptions(),
+    ...CONFIG.BROWSER_OPTIONS
+  });
 
-  for (const category of categories) {
-    const filename = `${CONFIG.OUTPUT_DIR}/${category.name.replace(/[^a-z0-9]/gi, '_')}.json`;
-    if (fs.existsSync(filename)) {
-      debug(`Skipping ${category.name} - already processed`);
-      continue;
-    }
-
-    try {
-      const apps = await scrapeCategory(page, category);
+  try {
+    // Process categories in chunks of CONCURRENT_CATEGORIES
+    for (let i = 0; i < categories.length; i += CONFIG.CONCURRENT_CATEGORIES) {
+      const categoryBatch = categories.slice(i, i + CONFIG.CONCURRENT_CATEGORIES);
+      debug(`Processing batch of ${categoryBatch.length} categories`);
       
-      if (apps.length > 0) {
-        fs.writeFileSync(filename, JSON.stringify({
-          category: category.name,
-          url: category.url,
-          scrapedAt: new Date().toISOString(),
-          totalUrls: apps.length,
-          urls: apps
-        }, null, 2));
-        
-        debug(`Saved ${apps.length} apps for ${category.name}`);
-      }
+      await Promise.all(
+        categoryBatch.map(category => processCategory(browser, category))
+      );
       
-      await delay(CONFIG.DELAY);
-    } catch (error) {
-      console.error(`Error scraping ${category.name}:`, error);
+      debug(`Completed batch ${Math.floor(i / CONFIG.CONCURRENT_CATEGORIES) + 1}`);
     }
+  } finally {
+    await browser.close();
   }
-
-  await browser.close();
+  
   debug('Scraping process completed');
 }
 
