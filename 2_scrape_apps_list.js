@@ -13,7 +13,7 @@ const CONFIG = {
   LOAD_MORE_DELAY: 3000,
   
   // Path to Chrome executable for Puppeteer
-  CHROME_PATH: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  CHROME_PATH: process.env.CHROME_PATH || getDefaultChromePath(),
   
   // Directory where category results will be saved
   OUTPUT_DIR: 'category_results',
