@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer-core');
 const fs = require('fs');
+const os = require('os');
 
 const CONFIG = {
   // Maximum time (in milliseconds) to wait for page operations before timing out
@@ -46,6 +47,38 @@ const debug = (...args) => {
     console.log(`[${new Date().toISOString()}]`, ...args);
   }
 };
+
+/**
+ * Determines if the script is running on macOS
+ * @returns {boolean} True if running on macOS, false otherwise
+ */
+function isMacOS() {
+  return os.platform() === 'darwin';
+}
+
+/**
+ * Gets the appropriate Puppeteer launch options based on the operating system
+ * @returns {Object} Puppeteer launch configuration options
+ */
+function getLaunchOptions() {
+  const baseOptions = {
+    executablePath: CONFIG.CHROME_PATH,
+    args: ['--no-sandbox'],
+    defaultViewport: null
+  };
+
+  if (isMacOS()) {
+    return {
+      ...baseOptions,
+      headless: false
+    };
+  }
+
+  return {
+    ...baseOptions,
+    headless: 'new'
+  };
+}
 
 /**
  * Configures a Puppeteer page instance with request interception and timeout settings.
@@ -431,12 +464,7 @@ async function main() {
   const categories = JSON.parse(fs.readFileSync('categories.json'));
   debug(`Loaded ${categories.length} categories`);
 
-  const browser = await puppeteer.launch({
-    headless: false,
-    executablePath: CONFIG.CHROME_PATH,
-    args: ['--no-sandbox'],
-    defaultViewport: null
-  });
+  const browser = await puppeteer.launch(getLaunchOptions());
   
   const page = await browser.newPage();
   await setupPage(page);
