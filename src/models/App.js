@@ -69,6 +69,16 @@ const AppSchema = new mongoose.Schema({
   isPremium: {
     type: Boolean,
     default: false
+  },
+  triggersCount: {
+    type: Number,
+    default: 0,
+    min: 0
+  },
+  actionsCount: {
+    type: Number,
+    default: 0,
+    min: 0
   }
 });
 
