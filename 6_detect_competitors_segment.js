@@ -2,6 +2,25 @@ require('dotenv').config();
 const { connectDB } = require('./src/utils/mongoUtils');
 const App = require('./src/models/App');
 const openAIService = require('./src/services/openaiService');
+const RedisService = require('./src/services/redisService');
+const os = require('os');
+const colors = require('colors');
+
+// Get machine ID from env or hostname
+const MACHINE_ID = process.env.MACHINE_ID || os.hostname().split('.')[0];
+
+// Initialize Redis Service
+const redisService = new RedisService(MACHINE_ID);
+
+// Add machine status tracking
+const machineStatus = {
+  machine_id: MACHINE_ID,
+  started_at: Date.now(),
+  last_active: Date.now(),
+  processed_count: 0,
+  failed_count: 0,
+  current_app: null
+};
 
 class CompetitorSegmentAnalyzer {
   constructor() {
@@ -45,7 +64,7 @@ class CompetitorSegmentAnalyzer {
 
     try {
       const completion = await this.openAIService.openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-4o",
         messages: [
           {
             role: "system",
@@ -66,11 +85,77 @@ class CompetitorSegmentAnalyzer {
     }
   }
 
+  async processApp(app) {
+    const appSlug = app.slug;
+    machineStatus.current_app = app.title;
+
+    try {
+      // Check if app is being processed by another machine
+      const { isProcessing, isCompleted } = await redisService.checkAppStatus(appSlug);
+      
+      if (isProcessing) {
+        console.log(`${app.title} is being analyzed by another machine, skipping...`.yellow);
+        return;
+      }
+
+      if (isCompleted) {
+        console.log(`${app.title} already analyzed, skipping...`.cyan);
+        return;
+      }
+
+      // Mark as processing
+      await redisService.markAppProcessing(appSlug);
+      console.log(`Started analyzing ${app.title}`.gray);
+
+      const analysis = await this.analyzeCompetitorAndSegment(app);
+      
+      // Update app with analysis results
+      await App.findByIdAndUpdate(app._id, {
+        competitorScore: analysis.competitorScore,
+        integrationSegment: analysis.integrationSegment
+      });
+
+      // Mark as completed in Redis
+      await redisService.markAppCompleted(appSlug, {
+        competitor_score: analysis.competitorScore,
+        integration_segment: analysis.integrationSegment,
+        competitor_reasoning: analysis.competitorReasoning,
+        segment_reasoning: analysis.segmentReasoning
+      });
+
+      // Update machine status
+      machineStatus.processed_count++;
+
+      // Print the detailed reasoning
+      console.log('\nAnalysis for:', colors.cyan(app.title));
+      console.log('Competitor Score:'.yellow, colors.white(analysis.competitorScore));
+      console.log('Competitor Reasoning:'.yellow, colors.white(analysis.competitorReasoning));
+      console.log('Integration Segment:'.yellow, colors.white(analysis.integrationSegment));
+      console.log('Segment Reasoning:'.yellow, colors.white(analysis.segmentReasoning));
+      console.log(colors.gray('-'.repeat(80)), '\n');
+
+    } catch (error) {
+      console.error(`Error processing ${app.title}:`.red, error);
+      machineStatus.failed_count++;
+      // Remove processing flag on error
+      await redisService.client.del(`app:processing:${appSlug}`);
+      throw error;
+    } finally {
+      machineStatus.current_app = null;
+    }
+  }
+
   async processAllRelevantApps() {
     try {
+      // Check Redis connection
+      if (!await redisService.isConnected()) {
+        console.error('Redis connection failed. Exiting...'.red);
+        process.exit(1);
+      }
+
       // Connect to MongoDB
       await connectDB();
-      console.log('MongoDB connected successfully');
+      console.log('MongoDB connected successfully'.green);
 
       // Find all relevant apps that haven't been analyzed yet
       const apps = await App.find({
@@ -81,50 +166,49 @@ class CompetitorSegmentAnalyzer {
         ]
       });
 
-      console.log(`Found ${apps.length} relevant apps to analyze`);
+      console.log(`Found ${apps.length} relevant apps to analyze`.yellow);
 
       for (const app of apps) {
         try {
-          console.log(`Analyzing ${app.title}...`);
-          
-          const analysis = await this.analyzeCompetitorAndSegment(app);
-          
-          // Update app with analysis results
-          await App.findByIdAndUpdate(app._id, {
-            competitorScore: analysis.competitorScore,
-            integrationSegment: analysis.integrationSegment
-          });
-
-          // Print the detailed reasoning
-          console.log('\nAnalysis for:', app.title.cyan);
-          console.log('Competitor Score:'.yellow, analysis.competitorScore);
-          console.log('Competitor Reasoning:'.yellow, analysis.competitorReasoning);
-          console.log('Integration Segment:'.yellow, analysis.integrationSegment);
-          console.log('Segment Reasoning:'.yellow, analysis.segmentReasoning);
-          console.log('-'.repeat(80), '\n');
-
+          await this.processApp(app);
           // Add delay to respect rate limits
           await new Promise(resolve => setTimeout(resolve, 1000));
-
         } catch (error) {
-          console.error(`Error processing ${app.title}:`, error);
+          console.error(`Error in main loop for ${app.title}:`.red, error);
           continue; // Continue with next app even if one fails
         }
       }
 
-      console.log('Analysis complete');
+      console.log('Analysis complete'.green);
       process.exit(0);
 
     } catch (error) {
-      console.error('Main process error:', error);
+      console.error('Main process error:'.red, error);
       process.exit(1);
     }
   }
 }
 
+// Update machine status periodically
+setInterval(async () => {
+  try {
+    await redisService.updateMachineStatus(machineStatus);
+  } catch (error) {
+    console.error('Failed to update machine status:'.red, error);
+  }
+}, 30000);
+
 // Handle graceful shutdown
-process.on('SIGINT', () => {
-  console.log('\nGracefully shutting down...');
+process.on('SIGINT', async () => {
+  console.log('\nGracefully shutting down...'.yellow);
+  try {
+    await redisService.updateMachineStatus({
+      ...machineStatus,
+      status: 'stopped'
+    });
+  } catch (error) {
+    console.error('Error updating final status:'.red, error);
+  }
   process.exit(0);
 });
 
