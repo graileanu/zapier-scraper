@@ -66,6 +66,75 @@ class InteractionAnalyzer {
         - "Send Email" (action: it performs an operation)
         - "Find User" (action: it retrieves data)
 
+        2. RELEVANCY ANALYSIS
+        Determine if each interaction is relevant for Retently integration (isRelevant: true/false)
+
+        Evaluation Criteria:
+        SET isRelevant = true IF:
+        a) For Triggers:
+        - Creates opportunity for timely customer feedback (e.g., after purchase, service usage)
+        - Indicates significant customer lifecycle events
+        - Represents customer interaction points
+        - Provides valuable context for survey timing
+        Examples:
+        - "Order Completed" (Relevant: good time for CSAT survey)
+        - "Support Ticket Closed" (Relevant: perfect for CES survey)
+        - "Subscription Renewed" (Relevant: appropriate for NPS survey)
+
+        b) For Actions:
+        - Can utilize Retently's survey data or scores
+        - Helps sync customer data between systems
+        - Enables automated responses to feedback
+        - Enhances customer experience tracking
+        Examples:
+        - "Update Customer Profile" (Relevant: can sync with Retently data)
+        - "Create Support Ticket" (Relevant: can be triggered by negative feedback)
+        - "Add User Tag" (Relevant: can be based on NPS score)
+
+        SET isRelevant = false IF:
+        - Internal system operations unrelated to customer experience
+        - Technical operations without customer context
+        - Administrative tasks without customer impact
+        Examples:
+        - "Update System Settings" (Not Relevant: internal operation)
+        - "Backup Database" (Not Relevant: technical task)
+        - "Generate Report" (Not Relevant: administrative task)
+
+        3. SEGMENT CLASSIFICATION
+        Classify each interaction's business segment (relevancySegment: ALL|ECOMMERCE|B2B|B2C)
+
+        Segment Guidelines:
+        ALL: 
+        - Universal customer experience touchpoints
+        - General customer data management
+        - Basic feedback collection points
+        Examples:
+        - "Customer Support Ticket Closed" (ALL: applies to any business)
+        - "User Account Created" (ALL: universal process)
+
+        ECOMMERCE:
+        - Online shopping specific
+        - Order/product related
+        - Shopping cart operations
+        Examples:
+        - "Order Shipped" (ECOMMERCE: specific to online retail)
+        - "Cart Abandoned" (ECOMMERCE: online shopping specific)
+
+        B2B:
+        - Enterprise/business customer focused
+        - Project/contract related
+        - Service agreement touchpoints
+        Examples:
+        - "Project Milestone Completed" (B2B: business project specific)
+        - "Contract Renewed" (B2B: business relationship specific)
+
+        B2C:
+        - Individual consumer focused (non-ecommerce)
+        - Personal service related
+        - Individual account management
+        Examples:
+        - "Appointment Completed" (B2C: individual service)
+        - "Personal Plan Updated" (B2C: individual account)
 
         APP CONTEXT:
         Title: "${app.title}"
@@ -125,21 +194,26 @@ class InteractionAnalyzer {
               "name": string (original name),
               "description": string (original description),
               "type": "trigger" | "action",
+              "isRelevant": boolean,
+              "relevancySegment": "ALL" | "ECOMMERCE" | "B2B" | "B2C"
             }
           ]
         }
 
         QUALITY REQUIREMENTS:
         1. Response MUST be a JSON object with an "interactions" array
-        2. EVERY interaction in the array must have ALL 3 fields
+        2. EVERY interaction in the array must have ALL five fields
         3. 'type' must be lowercase "trigger" or "action" only
-        4. Maintain original name and description exactly
-        5. Return valid JSON only, no explanations or comments
+        4. 'relevancySegment' must be uppercase "ALL", "ECOMMERCE", "B2B", or "B2C" only
+        5. Maintain original name and description exactly
+        6. Return valid JSON only, no explanations or comments
 
         CRITICAL: YOU MUST PRESERVE these five fields for EACH interaction:
         1. name (original)
         2. description (original)
         3. type (you must add this)
+        4. isRelevant (you must add this)
+        5. relevancySegment (you must add this)
 
         SHOPIFY-SPECIFIC EXAMPLES:
 
@@ -155,6 +229,8 @@ class InteractionAnalyzer {
         "name": "New Paid Order",
         "description": "Triggers when an order is paid (with line item support).",
         "type": "trigger",
+        "isRelevant": true,
+        "relevancySegment": "ECOMMERCE"
         }
         Reasoning: Perfect trigger point for CSAT survey, clearly ecommerce-specific
 
@@ -170,6 +246,8 @@ class InteractionAnalyzer {
         "name": "Update Customer",
         "description": "Replaces only data that is set for an existing customer.",
         "type": "action",
+        "isRelevant": true,
+        "relevancySegment": "ALL"
         }
         Reasoning: Customer data sync is relevant for all segments
 
@@ -185,10 +263,35 @@ class InteractionAnalyzer {
         "name": "API Request (Beta)",
         "description": "This advanced action makes a raw HTTP request that includes this integration's authentication.",
         "type": "action",
+        "isRelevant": false,
+        "relevancySegment": "ALL"
         }
         Reasoning: Technical operation not related to customer experience
 
-      Now analyze the provided interactions following these guidelines.`;
+        COMMON SHOPIFY PATTERNS:
+
+        1. Order-related interactions:
+        - Almost always ECOMMERCE segment
+        - Usually relevant for customer feedback
+        - Examples: New Order, Fulfilled Order, Cancelled Order
+
+        2. Customer-related interactions:
+        - Usually ALL segment (customer management is universal)
+        - Typically relevant for data synchronization
+        - Examples: New Customer, Update Customer, Customer Tags
+
+        3. Product-related interactions:
+        - Always ECOMMERCE segment
+        - Relevant only if customer-facing
+        - Examples: New Product (relevant), Update Inventory (not relevant)
+
+        4. Technical/Administrative interactions:
+        - Usually ALL segment
+        - Typically not relevant
+        - Examples: API Requests, Metafield operations
+
+
+        Now analyze the provided interactions following these guidelines.`;
 
     try {
       const completion = await this.openAIService.openai.chat.completions.create({
@@ -202,7 +305,7 @@ class InteractionAnalyzer {
         ],
         temperature: 0.1,
         response_format: { type: "json_object" },
-        max_tokens: 4000
+        max_tokens: 8000
       });
 
       const content = completion.choices[0].message.content;
@@ -224,7 +327,7 @@ class InteractionAnalyzer {
       // Validate each interaction
       parsed.interactions.forEach((interaction, index) => {
         // Check for exact required fields
-        const requiredFields = ['name', 'description', 'type'];
+        const requiredFields = ['name', 'description', 'type', 'isRelevant', 'relevancySegment'];
         const missingFields = requiredFields.filter(field => !interaction.hasOwnProperty(field));
         
         if (missingFields.length > 0) {
@@ -241,14 +344,21 @@ class InteractionAnalyzer {
         if (!['trigger', 'action'].includes(interaction.type)) {
           throw new Error(`Invalid type "${interaction.type}" at index ${index}`);
         }
+        if (typeof interaction.isRelevant !== 'boolean') {
+          throw new Error(`isRelevant must be boolean at index ${index}`);
+        }
+        if (!['ALL', 'ECOMMERCE', 'B2B', 'B2C'].includes(interaction.relevancySegment)) {
+          throw new Error(`Invalid relevancySegment "${interaction.relevancySegment}" at index ${index}`);
+        }
 
         // Verify fields match original
         const originalInteraction = app.interactions.find(i => i.name === interaction.name);
         if (!originalInteraction) {
           throw new Error(`No matching original interaction found for "${interaction.name}"`);
         }
-        if (interaction.description !== originalInteraction.description) {
-          throw new Error(`Original description modified for "${interaction.name}"`);
+        if (interaction.description !== originalInteraction.description || 
+            interaction.type !== originalInteraction.type) {
+          throw new Error(`Original fields modified for "${interaction.name}"`);
         }
       });
 
@@ -317,6 +427,7 @@ class InteractionAnalyzer {
       // Print analysis summary
       console.log('\nInteraction Analysis for:', colors.cyan(app.title));
       console.log('Total Interactions:'.yellow, colors.white(analyzedInteractions.length));
+      console.log('Relevant Interactions:'.yellow, colors.white(analyzedInteractions.filter(i => i.isRelevant).length));
       console.log(colors.gray('-'.repeat(80)), '\n');
 
     } catch (error) {
