@@ -293,7 +293,7 @@ class OpenAIService {
 
   async analyzeAppRelevancy(appTitle, appDescription) {
     const prompt = `
-      You are tasked with analyzing the business relevancy of integrating Retently (a Customer Experience Management platform focusing on NPS, CSAT, and CES surveys) with another application.
+      You are tasked with analyzing the business relevancy of integrating a specific application with Retently (a Customer Experience Management platform focusing on NPS, CSAT, and CES surveys).
 
       Application to analyze:
       Title: ${appTitle}
@@ -307,41 +307,80 @@ class OpenAIService {
       Actions (things other apps can make Retently do):
       ${JSON.stringify(this.retentlyActions, null, 2)}
 
-      Task: Analyze if there's meaningful business value in integrating this application with Retently. Consider these integration scenarios:
+      Task: Analyze if there's meaningful business value in integrating this application with Retently.
 
-      1. Can the app trigger transactional NPS/CSAT surveys in Retently?
-      2. Does the app manage customer data that might require syncing  with Retently?
-      3. Does the app handle customer opt-outs that should sync to Retently?
-      4. Would the app benefit from receiving Retently's NPS/CSAT score updates?
-      5. Is the app a data/analytics platform that could use Retently's survey data?
-      6. Could survey responses in Retently trigger meaningful actions in this app?
+      IMPORTANT EVALUATION CRITERIA:
+      1. The app being analyzed must be DIFFERENT from Retently itself - integrating Retently with Retently is automatically not relevant
+      2. There must be a clear, direct business need for the integration, not just a theoretical possibility
+      3. The integration should serve a specific customer experience management purpose
 
-      Provide your analysis as a JSON object with this structure:
+      Consider these specific integration scenarios:
+      1. Customer Journey Triggers:
+         - Does the app have meaningful customer interaction points (purchases, support tickets, account changes) that would make sense to trigger NPS/CSAT surveys?
+         Example: Shopify (Relevant) - Sending surveys after purchases
+         Example: Calculator App (Not Relevant) - No meaningful customer interaction points
+
+      2. Customer Data Syncing:
+         - Does the app manage customer profiles that would benefit from being synced with Retently?
+         Example: CRM System (Relevant) - Keeping customer contact info and preferences in sync
+         Example: Weather App (Not Relevant) - No customer profiles to sync
+
+      3. Feedback Loop Utilization:
+         - Could the app meaningfully use Retently's survey responses or score updates?
+         Example: Analytics Platform (Relevant) - Incorporating NPS scores into dashboards
+         Example: File Converter (Not Relevant) - No use for customer feedback data
+
+      EXAMPLE OF GOOD ANALYSIS:
+      For Shopify:
       {
-        "isRelevant": boolean,
-        "relevancyReasoning": "Brief explanation of why the integration is or isn't relevant",
-        "potentialUseCase": "If relevant, describe the most compelling integration scenario"
+        "isRelevant": true,
+        "relevancyReasoning": "Shopify manages e-commerce transactions and customer data, providing clear trigger points for customer feedback collection and data synchronization needs",
+        "potentialUseCase": "Trigger automated NPS/CSAT surveys after purchases, sync customer purchase history and contact details, use feedback scores to inform customer service and marketing strategies"
       }
 
-      Focus on practical business value, not theoretical possibilities. Do not send non-JSON responses.
+      EXAMPLE OF BAD ANALYSIS:
+      For Calculator App:
+      {
+        "isRelevant": false,
+        "relevancyReasoning": "Calculator apps don't manage customer relationships or have meaningful interaction points that would benefit from NPS/CSAT feedback",
+        "potentialUseCase": null
+      }
+
+      Analyze the given application and provide a JSON response with this structure:
+      {
+        "isRelevant": boolean,
+        "relevancyReasoning": "Clear, specific explanation focused on this app's actual use case",
+        "potentialUseCase": "If relevant, describe the specific, practical integration scenario" || null
+      }
+
+      Rules:
+      - BE SPECIFIC to this application, avoid generic statements
+      - Focus on PRACTICAL use cases, not theoretical possibilities
+      - If not relevant, potentialUseCase should be null
+      - Never suggest integrating Retently with itself
+      - Keep reasoning concise and focused on actual business value
     `;
 
     try {
       const completion = await this.openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-4o",
         messages: [
           {
             role: "system",
-            content: "You are an expert in business software integration analysis, particularly focused on customer experience management platforms."
+            content: "You are an expert in business software integration analysis, particularly focused on customer experience management platforms. Be specific and practical in your analysis."
           },
           { role: "user", content: prompt }
         ],
-        response_format: { type: "json_object" },
         temperature: 0.1,
         max_tokens: 1000
       });
 
-      return JSON.parse(completion.choices[0].message.content);
+      try {
+        return JSON.parse(completion.choices[0].message.content);
+      } catch (parseError) {
+        console.error('Failed to parse OpenAI response:', completion.choices[0].message.content);
+        throw new Error('Invalid JSON response from OpenAI');
+      }
     } catch (error) {
       console.error('OpenAI API error during relevancy analysis:', error);
       throw error;
