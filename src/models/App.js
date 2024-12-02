@@ -50,6 +50,17 @@ const AppSchema = new mongoose.Schema({
   },
   relevancyReasoning: String,
   potentialUseCase: String,
+  competitorScore: {
+    type: Number,
+    min: 0,
+    max: 10,
+    default: null
+  },
+  integrationSegment: {
+    type: String,
+    enum: ['ALL', 'ECOMMERCE', 'B2B', 'B2C'],
+    default: null
+  },
   scrapedAt: Date,
   updatedAt: {
     type: Date,
