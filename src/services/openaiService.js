@@ -292,6 +292,15 @@ class OpenAIService {
   }
 
   async analyzeAppRelevancy(appTitle, appDescription) {
+    // Early check for Retently itself - edge case
+    if (appTitle.toLowerCase().includes('retently')) {
+      return {
+        isRelevant: false,
+        relevancyReasoning: "This is Retently itself - integration with itself is not applicable",
+        potentialUseCase: null
+      };
+    }
+
     const prompt = `
       You are tasked with analyzing the business relevancy of integrating a specific application with Retently (a Customer Experience Management platform focusing on NPS, CSAT, and CES surveys).
 
@@ -346,6 +355,7 @@ class OpenAIService {
         "potentialUseCase": null
       }
 
+      REQUIRED OUTPUT FORMAT:
       Analyze the given application and provide a JSON response with this structure:
       {
         "isRelevant": boolean,
@@ -356,10 +366,9 @@ class OpenAIService {
       Rules:
       - BE SPECIFIC to this application, avoid generic statements
       - Focus on PRACTICAL use cases, not theoretical possibilities
-      - If not relevant, potentialUseCase should be null
-      - Never suggest integrating Retently with itself
+      - If not relevant, potentialUseCase must be null
       - Keep reasoning concise and focused on actual business value
-      - Return ONLY the JSON object, no other text
+      - Return ONLY the JSON object, no other text or formatting
     `;
 
     try {
@@ -368,7 +377,7 @@ class OpenAIService {
         messages: [
           {
             role: "system",
-            content: "You are an expert in business software integration analysis, particularly focused on customer experience management platforms. Be specific and practical in your analysis."
+            content: "You are a JSON-only response bot. Always return a valid JSON object with exactly these fields: isRelevant (boolean), relevancyReasoning (string), and potentialUseCase (string or null). No additional text or formatting."
           },
           { role: "user", content: prompt }
         ],
@@ -376,10 +385,13 @@ class OpenAIService {
         max_tokens: 1000
       });
 
+      const content = completion.choices[0].message.content;
       try {
-        return JSON.parse(completion.choices[0].message.content);
+        // Clean any potential markdown or extra formatting
+        const cleanedContent = content.replace(/```json\n|\n```|```/g, '').trim();
+        return JSON.parse(cleanedContent);
       } catch (parseError) {
-        console.error('Failed to parse OpenAI response:', completion.choices[0].message.content);
+        console.error('Failed to parse OpenAI response:', content);
         throw new Error('Invalid JSON response from OpenAI');
       }
     } catch (error) {
