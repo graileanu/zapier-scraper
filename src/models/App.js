@@ -48,6 +48,8 @@ const AppSchema = new mongoose.Schema({
     type: Boolean,
     default: null
   },
+  relevancyReasoning: String,
+  potentialUseCase: String,
   scrapedAt: Date,
   updatedAt: {
     type: Date,

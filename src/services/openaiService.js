@@ -6,6 +6,49 @@ class OpenAIService {
     this.openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY
     });
+
+    // Define Retently's triggers and actions as class properties
+    this.retentlyTriggers = [
+      {
+        "name": "New Survey Response",
+        "description": "Triggers when a customer submits an NPS, CSAT, or CES survey response"
+      },
+      {
+        "name": "Score Updated",
+        "description": "Triggers when a customer's NPS/CSAT/CES score is updated"
+      },
+      {
+        "name": "Customer Unsubscribed",
+        "description": "Triggers when a customer opts out of surveys"
+      },
+      {
+        "name": "New Customer Created",
+        "description": "Triggers when a new customer profile is created in Retently"
+      }
+    ];
+
+    this.retentlyActions = [
+      {
+        "name": "Send NPS Survey",
+        "description": "Sends an NPS survey to a specified customer"
+      },
+      {
+        "name": "Send CSAT Survey",
+        "description": "Sends a CSAT survey to a specified customer"
+      },
+      {
+        "name": "Create/Update Customer",
+        "description": "Creates or updates a customer profile in Retently"
+      },
+      {
+        "name": "Add Tag to Response",
+        "description": "Adds a tag to a survey response"
+      },
+      {
+        "name": "Opt-out Customer",
+        "description": "Marks a customer as opted-out from surveys"
+      }
+    ];
   }
 
   async normalizeAppData(appData) {
@@ -244,6 +287,63 @@ class OpenAIService {
       return processedData.interactions;
     } catch (error) {
       console.error('OpenAI API error:', error);
+      throw error;
+    }
+  }
+
+  async analyzeAppRelevancy(appTitle, appDescription) {
+    const prompt = `
+      You are tasked with analyzing the business relevancy of integrating Retently (a Customer Experience Management platform focusing on NPS, CSAT, and CES surveys) with another application.
+
+      Application to analyze:
+      Title: ${appTitle}
+      Description: ${appDescription}
+
+      Retently's Key Features and Integration Points:
+
+      Triggers (events that happen in Retently):
+      ${JSON.stringify(this.retentlyTriggers, null, 2)}
+
+      Actions (things other apps can make Retently do):
+      ${JSON.stringify(this.retentlyActions, null, 2)}
+
+      Task: Analyze if there's meaningful business value in integrating this application with Retently. Consider these integration scenarios:
+
+      1. Can the app trigger transactional NPS/CSAT surveys in Retently?
+      2. Does the app manage customer data that might require syncing  with Retently?
+      3. Does the app handle customer opt-outs that should sync to Retently?
+      4. Would the app benefit from receiving Retently's NPS/CSAT score updates?
+      5. Is the app a data/analytics platform that could use Retently's survey data?
+      6. Could survey responses in Retently trigger meaningful actions in this app?
+
+      Provide your analysis as a JSON object with this structure:
+      {
+        "isRelevant": boolean,
+        "relevancyReasoning": "Brief explanation of why the integration is or isn't relevant",
+        "potentialUseCase": "If relevant, describe the most compelling integration scenario"
+      }
+
+      Focus on practical business value, not theoretical possibilities. Do not send non-JSON responses.
+    `;
+
+    try {
+      const completion = await this.openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content: "You are an expert in business software integration analysis, particularly focused on customer experience management platforms."
+          },
+          { role: "user", content: prompt }
+        ],
+        response_format: { type: "json_object" },
+        temperature: 0.1,
+        max_tokens: 1000
+      });
+
+      return JSON.parse(completion.choices[0].message.content);
+    } catch (error) {
+      console.error('OpenAI API error during relevancy analysis:', error);
       throw error;
     }
   }
