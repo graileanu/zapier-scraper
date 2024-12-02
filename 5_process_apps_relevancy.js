@@ -42,7 +42,7 @@ async function processApp(app) {
 
     // Use existing markAppProcessing method
     await redisService.markAppProcessing(appSlug);
-    console.log(`Started analyzing ${app.title}`.green);
+    console.log(`Started analyzing ${app.title}`.gray);
 
     // Get relevancy analysis from OpenAI
     const analysis = await openAIService.analyzeAppRelevancy(
@@ -69,7 +69,7 @@ async function processApp(app) {
     machineStatus.processed_count++;
     
     // Color-coded output based on relevancy
-    const statusColor = analysis.isRelevant ? 'green' : 'yellow';
+    const statusColor = analysis.isRelevant ? 'green' : 'red';
     console.log(`Successfully analyzed ${app.title}: ${analysis.isRelevant ? 'Relevant' : 'Not Relevant'}`[statusColor]);
 
   } catch (error) {
