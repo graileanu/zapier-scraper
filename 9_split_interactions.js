@@ -208,6 +208,89 @@ class InteractionAnalyzer {
         5. Maintain original name and description exactly
         6. Return valid JSON only, no explanations or comments
 
+        CRITICAL: YOU MUST PRESERVE these five fields for EACH interaction:
+        1. name (original)
+        2. description (original)
+        3. type (you must add this)
+        4. isRelevant (you must add this)
+        5. relevancySegment (you must add this)
+
+        SHOPIFY-SPECIFIC EXAMPLES:
+
+        Example 1 - Order Related:
+        Input:
+        {
+        "name": "New Paid Order",
+        "description": "Triggers when an order is paid (with line item support).",
+        "type": "trigger"
+        }
+        Required Output:
+        {
+        "name": "New Paid Order",
+        "description": "Triggers when an order is paid (with line item support).",
+        "type": "trigger",
+        "isRelevant": true,
+        "relevancySegment": "ECOMMERCE"
+        }
+        Reasoning: Perfect trigger point for CSAT survey, clearly ecommerce-specific
+
+        Example 2 - Customer Related:
+        Input:
+        {
+        "name": "Update Customer",
+        "description": "Replaces only data that is set for an existing customer.",
+        "type": "action"
+        }
+        Required Output:
+        {
+        "name": "Update Customer",
+        "description": "Replaces only data that is set for an existing customer.",
+        "type": "action",
+        "isRelevant": true,
+        "relevancySegment": "ALL"
+        }
+        Reasoning: Customer data sync is relevant for all segments
+
+        Example 3 - Technical Action:
+        Input:
+        {
+        "name": "API Request (Beta)",
+        "description": "This advanced action makes a raw HTTP request that includes this integration's authentication.",
+        "type": "action"
+        }
+        Required Output:
+        {
+        "name": "API Request (Beta)",
+        "description": "This advanced action makes a raw HTTP request that includes this integration's authentication.",
+        "type": "action",
+        "isRelevant": false,
+        "relevancySegment": "ALL"
+        }
+        Reasoning: Technical operation not related to customer experience
+
+        COMMON SHOPIFY PATTERNS:
+
+        1. Order-related interactions:
+        - Almost always ECOMMERCE segment
+        - Usually relevant for customer feedback
+        - Examples: New Order, Fulfilled Order, Cancelled Order
+
+        2. Customer-related interactions:
+        - Usually ALL segment (customer management is universal)
+        - Typically relevant for data synchronization
+        - Examples: New Customer, Update Customer, Customer Tags
+
+        3. Product-related interactions:
+        - Always ECOMMERCE segment
+        - Relevant only if customer-facing
+        - Examples: New Product (relevant), Update Inventory (not relevant)
+
+        4. Technical/Administrative interactions:
+        - Usually ALL segment
+        - Typically not relevant
+        - Examples: API Requests, Metafield operations
+
+
         Now analyze the provided interactions following these guidelines.`;
 
     try {
@@ -227,18 +310,55 @@ class InteractionAnalyzer {
 
       const content = completion.choices[0].message.content;
       const parsed = JSON.parse(content);
-      
-      if (!parsed || !parsed.interactions || !Array.isArray(parsed.interactions)) {
-        console.error(`Invalid response structure for ${app.title}:`, content);
-        throw new Error('Invalid response format from OpenAI');
+
+      // Strict validation of response structure
+      if (!parsed || typeof parsed !== 'object') {
+        throw new Error('Response must be an object');
+      }
+
+      if (!parsed.interactions || !Array.isArray(parsed.interactions)) {
+        throw new Error('Response must contain interactions array');
+      }
+
+      if (parsed.interactions.length === 0) {
+        throw new Error('Interactions array cannot be empty');
       }
 
       // Validate each interaction
       parsed.interactions.forEach((interaction, index) => {
-        if (!interaction.name || !interaction.description || !interaction.type || 
-            !interaction.hasOwnProperty('isRelevant') || !interaction.relevancySegment) {
-          console.error(`Invalid interaction at index ${index} for ${app.title}:`, interaction);
-          throw new Error(`Interaction at index ${index} is missing required fields`);
+        // Check for exact required fields
+        const requiredFields = ['name', 'description', 'type', 'isRelevant', 'relevancySegment'];
+        const missingFields = requiredFields.filter(field => !interaction.hasOwnProperty(field));
+        
+        if (missingFields.length > 0) {
+          throw new Error(`Interaction at index ${index} is missing required fields: ${missingFields.join(', ')}`);
+        }
+
+        // Validate field types and values
+        if (typeof interaction.name !== 'string' || interaction.name.length === 0) {
+          throw new Error(`Invalid name at index ${index}`);
+        }
+        if (typeof interaction.description !== 'string' || interaction.description.length === 0) {
+          throw new Error(`Invalid description at index ${index}`);
+        }
+        if (!['trigger', 'action'].includes(interaction.type)) {
+          throw new Error(`Invalid type "${interaction.type}" at index ${index}`);
+        }
+        if (typeof interaction.isRelevant !== 'boolean') {
+          throw new Error(`isRelevant must be boolean at index ${index}`);
+        }
+        if (!['ALL', 'ECOMMERCE', 'B2B', 'B2C'].includes(interaction.relevancySegment)) {
+          throw new Error(`Invalid relevancySegment "${interaction.relevancySegment}" at index ${index}`);
+        }
+
+        // Verify fields match original
+        const originalInteraction = app.interactions.find(i => i.name === interaction.name);
+        if (!originalInteraction) {
+          throw new Error(`No matching original interaction found for "${interaction.name}"`);
+        }
+        if (interaction.description !== originalInteraction.description || 
+            interaction.type !== originalInteraction.type) {
+          throw new Error(`Original fields modified for "${interaction.name}"`);
         }
       });
 
