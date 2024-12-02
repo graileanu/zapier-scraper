@@ -23,12 +23,12 @@ const machineStatus = {
 };
 
 async function processApp(app) {
-  const normalizedAppName = app.slug;
+  const appSlug = app.slug;
   machineStatus.current_app = app.title;
 
   try {
-    // Check if app is already being processed or completed
-    const { isProcessing, isCompleted } = await redisService.checkRelevancyStatus(normalizedAppName);
+    // Use existing checkAppStatus method
+    const { isProcessing, isCompleted } = await redisService.checkAppStatus(appSlug);
     
     if (isProcessing) {
       console.log(`${app.title} is being analyzed by another machine, skipping...`.yellow);
@@ -40,8 +40,8 @@ async function processApp(app) {
       return;
     }
 
-    // Mark as processing before starting
-    await redisService.markRelevancyProcessing(normalizedAppName);
+    // Use existing markAppProcessing method
+    await redisService.markAppProcessing(appSlug);
     console.log(`Started analyzing ${app.title}`.green);
 
     // Get relevancy analysis from OpenAI
@@ -50,18 +50,19 @@ async function processApp(app) {
       app.description
     );
 
-    // Update app record
+    // Update app record with correct field names from OpenAI response
     await App.findByIdAndUpdate(app._id, {
       isRelevant: analysis.isRelevant,
-      relevancyReasoning: analysis.reasoning,
+      relevancyReasoning: analysis.relevancyReasoning,
       potentialUseCase: analysis.potentialUseCase,
       updatedAt: new Date()
     });
 
-    // Mark as completed in Redis
-    await redisService.markRelevancyCompleted(normalizedAppName, {
+    // Use existing markAppCompleted method
+    await redisService.markAppCompleted(appSlug, {
       is_relevant: analysis.isRelevant,
-      reasoning: analysis.reasoning
+      reasoning: analysis.relevancyReasoning,
+      potential_use_case: analysis.potentialUseCase
     });
 
     // Update machine status
@@ -74,8 +75,8 @@ async function processApp(app) {
   } catch (error) {
     console.error(`Error processing ${app.title}`.red, error);
     machineStatus.failed_count++;
-    // Remove processing lock on error
-    await redisService.clearRelevancyProcessing(normalizedAppName);
+    // Use existing Redis client to remove processing flag
+    await redisService.client.del(`app:processing:${appSlug}`);
     throw error;
   } finally {
     machineStatus.current_app = null;
