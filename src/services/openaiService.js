@@ -295,9 +295,9 @@ class OpenAIService {
     const prompt = `
       You are tasked with analyzing the business relevancy of integrating a specific application with Retently (a Customer Experience Management platform focusing on NPS, CSAT, and CES surveys).
 
-      Application to analyze:
-      Title: ${appTitle}
-      Description: ${appDescription}
+      APPLICATION TO ANALYZE:
+      Title: "${appTitle}"
+      Description: "${appDescription}"
 
       Retently's Key Features and Integration Points:
 
@@ -359,6 +359,7 @@ class OpenAIService {
       - If not relevant, potentialUseCase should be null
       - Never suggest integrating Retently with itself
       - Keep reasoning concise and focused on actual business value
+      - Return ONLY the JSON object, no other text
     `;
 
     try {
