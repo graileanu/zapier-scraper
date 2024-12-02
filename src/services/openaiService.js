@@ -181,6 +181,72 @@ class OpenAIService {
       throw error;
     }
   }
+
+  async processInteractions(appData) {
+    const prompt = `
+      You are tasked with processing Zapier app interaction data. For each interaction in the provided data:
+      
+      1. Determine the correct type (trigger or action)
+      2. Ensure all three required fields are present
+      
+      Rules for processing:
+      
+      1. Type Classification:
+         - "trigger": Events or state changes that happen in the app (e.g., "New Order", "Updated Customer")
+         - "action": Operations the app can perform (e.g., "Create Order", "Update Product")
+      
+      2. Required Fields:
+         Each interaction must have exactly these fields:
+         {
+           "name": "string",
+           "description": "string",
+           "type": "trigger" or "action" (lowercase only)
+         }
+      
+      Input JSON:
+      ${JSON.stringify(appData, null, 2)}
+      
+      Return a JSON array containing only the processed interactions with the three required fields.
+      The response must be a valid JSON array that can be parsed.
+    `;
+
+    try {
+      const completion = await this.openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content: "You are a helpful assistant that processes interaction data. Respond only with valid JSON array."
+          },
+          { role: "user", content: prompt }
+        ],
+        response_format: { type: "json_object" },
+        max_tokens: 8192
+      });
+
+      const processedData = JSON.parse(completion.choices[0].message.content);
+      
+      // Validate the processed data
+      if (!Array.isArray(processedData.interactions)) {
+        throw new Error('Processed data must be an array of interactions');
+      }
+
+      // Verify each interaction has required fields
+      processedData.interactions.forEach((interaction, index) => {
+        if (!interaction.name || !interaction.description || !interaction.type) {
+          throw new Error(`Interaction at index ${index} is missing required fields`);
+        }
+        if (!['trigger', 'action'].includes(interaction.type)) {
+          throw new Error(`Invalid type "${interaction.type}" for interaction "${interaction.name}"`);
+        }
+      });
+
+      return processedData.interactions;
+    } catch (error) {
+      console.error('OpenAI API error:', error);
+      throw error;
+    }
+  }
 }
 
 module.exports = new OpenAIService();

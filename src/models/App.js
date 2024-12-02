@@ -16,7 +16,12 @@ const LinkSchema = new mongoose.Schema({
 
 const InteractionSchema = new mongoose.Schema({
   name: String,
-  description: String
+  description: String,
+  type: {
+    type: String,
+    enum: ['trigger', 'action'],
+    required: false
+  }
 }, { _id: false });
 
 const AppSchema = new mongoose.Schema({
@@ -39,6 +44,10 @@ const AppSchema = new mongoose.Schema({
   links: [LinkSchema],
   interactions: [InteractionSchema],
   category: String,
+  isRelevant: {
+    type: Boolean,
+    default: null
+  },
   scrapedAt: Date,
   updatedAt: {
     type: Date,
