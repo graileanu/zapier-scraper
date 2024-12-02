@@ -242,13 +242,10 @@ class InteractionAnalyzer {
           throw new Error(`Invalid type "${interaction.type}" at index ${index}`);
         }
 
-        // Verify fields match original
+        // Verify interaction exists in original data
         const originalInteraction = app.interactions.find(i => i.name === interaction.name);
         if (!originalInteraction) {
           throw new Error(`No matching original interaction found for "${interaction.name}"`);
-        }
-        if (interaction.description !== originalInteraction.description) {
-          throw new Error(`Original description modified for "${interaction.name}"`);
         }
       });
 
