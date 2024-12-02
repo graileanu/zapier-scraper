@@ -45,7 +45,7 @@ class CompetitorSegmentAnalyzer {
       Determine which business segment would benefit from integrating this app with Retently:
       - ALL: Benefits any type of business
       - ECOMMERCE: Only benefits ecommerce businesses
-      - B2B: Specifically for B2B software, tech, agency deals
+      - B2B: Specifically for B2B software, tech, marketing or consulting agencies
       - B2C: For financial, hrtech, healthcare (excluding ecommerce)
 
       APP TO ANALYZE:
